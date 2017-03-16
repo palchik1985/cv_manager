@@ -170,7 +170,7 @@ Route::get('/test', function () {
     ];
     
     header('Content-Type: json');
-    echo json_encode($start_array, JSON_PRETTY_PRINT);die;
+//    echo json_encode($start_array, JSON_PRETTY_PRINT);die;
     return view('resume', ['data' => $start_array]);
     
     
