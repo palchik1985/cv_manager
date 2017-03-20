@@ -19,32 +19,42 @@
 }
 
 body {
-    padding-top: 40px;
-    background: rgba(238, 238, 238, 0.7);
+    background: none;
+    min-width: 210mm;
+    min-height: 297mm;
+}
+
+section {
+    height: 296mm;
+    width: 210mm;
+    margin-bottom: 1mm;
 }
 
 .container  {
-    width: 588px;
+    width: 100%;
     margin: 0 auto;
     background: url('../img/bg.png') 0 0 no-repeat;
     background-size: cover;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 1);
-    height: 100vh;
+    /*box-shadow: 0 2px 20px rgba(0, 0, 0, 1);*/
+    height: 100%;
     position: relative;
+    /*padding: 5mm;*/
 }
 
 .pages1 .header {
-    display: flex;
-    flex-direction: column;
+    /*display: flex;*/
+    /*flex-direction: column;*/
     width: 100%;
     height: 238px;
     background: rgba(215, 215, 215, 0.4);
 }
 
 .pages1 .header-top {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*justify-content: space-between;*/
+    /*flex-wrap: nowrap;*/
+    height: 100px;
 }
 
 .pages1 .header-top h5 {
@@ -52,16 +62,18 @@ body {
     font-size: 18px;
     color: rgb(58, 129, 186);
     font-family: PlayBold, sans-serif;
+    float: left;
 }
 
 .pages1 .header-top img {
     width: 112px;
     height: 40px;
     margin: 22px 42px 0 0;
+    float: right;
 }
 
 .pages1 .header h2 {
-    margin: 125px 0 0 42px;
+    margin: 50px 0 0 42px;
     color: #000;
     font-size: 24px;
     font-family: PlayBold, sans-serif;
@@ -140,7 +152,7 @@ body {
 /*end .pages1*/
 
 .pages2 {
-    margin-top: 20px;
+    /*margin-top: 20px;*/
 }
 
 .pages2 .header {
@@ -157,12 +169,14 @@ body {
     font-size: 16px;
     color: #000;
     font-family: PlayRegular, sans-serif;
+    float: left;
 }
 
 .pages2 .header img {
     width: 112px;
     height: 40px;
     margin: 22px 42px 0 0;
+    float: right;
 }
 /*end header*/
 
@@ -231,8 +245,8 @@ body {
 /*end .pages2*/
 
 .pages3 {
-    margin-top: 20px;
-    margin-bottom: 40px;
+    /*margin-top: 20px;*/
+    /*margin-bottom: 40px;*/
 }
 
 .pages3 .header {
@@ -250,6 +264,7 @@ body {
     font-size: 16px;
     color: #000;
     font-family: PlayRegular, sans-serif;
+    float: left;
 }
 
 .pages3 .header h5 span {
@@ -260,6 +275,7 @@ body {
     width: 112px;
     height: 40px;
     margin: 22px 42px 0 0;
+    float: right;
 }
 /*end header*/
 
