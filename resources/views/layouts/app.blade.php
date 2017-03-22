@@ -5,8 +5,8 @@
 
     <title>Blank Developer</title>
 
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ url('/') }}/css/reset.css">
+    <link rel="stylesheet" href="{{ url('/') }}/css/style.css">
 </head>
 <body>
     @yield('content')
