@@ -1,40 +1,13 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
-
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+ * examples for use (you can copy this cases for use):
+ * WARNING: change /$PATH_TO_LARAVEL_FOLDER/artisan to your full path to Laravel project folder.
+ *   My path for example: /var/www/htmltopdf/artisan
+ * 1)
+ php /$PATH_TO_LARAVEL_FOLDER/artisan cv:generate --file /tmp/1234.json
+ * in this case you can see cv pdf file in /tmp/ folder (path where json file),
+ * and you can see full path file in returned json
+ *
+ * 2)
+ php /$PATH_TO_LARAVEL_FOLDER/artisan cv:generate '{ "header_text": "Header text", "logo": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAG0AAAAmCAYAAADOZxX5AAAD8ElEQVR4nO1b3XGjMBC+EiiBEujg0kHoIO7g3MG5g0sHdgeL84KkF\/ykzfCCO3A6sDvIPfBjAQtIQrqZs\/XNaJJAWK30af+E+PHDI0CUCQjcAJcp5PjS+53jrv4p0+Za7FOXgBlAUUXAZQoCNyDKRPs5leCiinzqGKCgnfTVcoLl+QeIMgkW8h+hjUu+5B85vgWrc4g6dunHLSPZRRVlXELG8Tvj+J0x3EOOLz76ehrU2aAnwkSZZFxWHWG9Jqsjxzcf\/T402hjmRTaXacbllSasR971yPF3iKOaACa3TuXlGB\/Z56+eOzRpteuMXer0UACBGxerWyFqwg2aNeC4czC8xwMUVbTGylwQBRzPwOQ7cDwH0jRgU4t5sKhTJ7vdfWHyHQRuXI\/3IaA7Ma6JGsSvS4hfjuCVKCJz1M1eQZTJh5A\/2wZFFal\/27ZRPwZyqf+lFiLkGFPPriNKlMmRyz8Zw4sPcoDjDTjuQOAGmMzIrHFhEMDx1JOZ44sri1dLDhO5jV6HkQdRxtJsLvRKH+B46G7eJ0VeM4aFZvNClKogufq4TIHjATjegMmvpQLfG2l3q6+gqCJT0hrdzqSsmrCex1JjeX+APQL9EbJIGJPvc0So+i7+z5A0USbA8aS086Dvr8F9qt2G+g5Jm5PTm2+COIKws5Zb7AgcCfVMWOsCHGFI2uj+cLI1SofaEvpWMLI0hnudeEgTZ0EYMbAYmNz6JnDSBayAF9JyjBdJm2mUvKH1NnJvTrbpFAIPlKtYQZjxitKaYEvSQJTJZDwf675bQ1rdH25Gcn3XnvfzHrgzJdTWBeik\/dakaZIAHM+kHI2Y1ulQVBGd2NWJiem89AZn\/Eztr5eJY3hRV7J2DaaxpeaTNDVhsnGz7RzN17YriLPdcwSOO3N3Ka867+p03Icr0uh4fp9QIhG5TLlXtX8yUxz2NXhGG7b+dZhpTbiYU+1WZXqf5Hni2ux2sX93pO2acmHgOWo9bWJaxnBPhQkyo2S4N5\/8RjHj57hMyRjG5HaKlOZc5GHOTeqe2HJJWnM9Jmqr62iHY4E0grCbOh5ygVgRZ+Eih4OxrjssdWkXW9tG95vdDKXFc9cn7pk1+vl4pFuOMfWs2UQZvgAlilA3hGm6xoAGJtam1h6uCGvlupDzNDCxtjYzckpYjrHPc5YPC11ro+qZ1X2HYwV20F3tbebmak8RBG7CW+sV0Dn72NtPq4vNve0BV5+HY58KOsfCR3tvTGbG\/Xj+XuDp4HtCfX4v8NSAHGNXh1g7mc0ZyxDDPKP7AnQFefc35sEd\/lOs\/XzXp24BC2hLg\/vH8TL9YJ+vH+zztbvG5DZ8rmuGvyPq9hpG0JPjAAAAAElFTkSuQmCC", "footer_text": "ITREX Group", "name": "Ivan Ivanov", "position": ".NET Developer", "summary": { "summary_details": [ "detail1", "detail2", "detail3" ], "technologies": [ "C", "C++", "HTML", "SQL", "JavaScript" ] }, "work_expirience": [ { "dates": { "date_start": "July 2015", "date_end": "September 2015" }, "fields": [ { "name": "Project Name", "value": "Distribution System" }, { "name": "Description", "value": "Standalone application for inventory management and management of Purchase\/Sales orders." }, { "name": "Company", "value": "ITREX Group" }, { "name": "Number of People", "value": "7" }, { "name": "Roles", "value": "Senior Developer \/ DB Architect" }, { "name": "Technologies", "value": ".NET, WPF, JavaScript" }, { "name": "Tools", "value": "MS VS 2015, MS SQL Server 2016, Git, Jira" } ] }, { "dates": { "date_start": "July 2015", "date_end": "September 2015" }, "fields": [ { "name": "Project Name", "value": "Distribution System" }, { "name": "Description", "value": "Standalone application for inventory management and management of Purchase\/Sales orders." }, { "name": "Company", "value": "ITREX Group" }, { "name": "Number of People", "value": "7" }, { "name": "Roles", "value": "Senior Developer \/ DB Architect" }, { "name": "Technologies", "value": ".NET, WPF, JavaScript" }, { "name": "Tools", "value": "MS VS 2015, MS SQL Server 2016, Git, Jira" }, { "name": "Test option", "value": "TEXT text TEXT text TEXT text TEXT text TEXT text TEXT text TEXT text TEXT text " } ] } ], "languages_tools_technologies": { "Programming Languages": [ { "name": "C\/C++", "level": "Advanced", "expirience": "2", "last_used": "2011" }, { "name": "C\/C++", "level": "Advanced", "expirience": "2", "last_used": "2011" }, { "name": "C\/C++", "level": "Advanced", "expirience": "2", "last_used": "2011" }, { "name": "C\/C++", "level": "Advanced", "expirience": "2", "last_used": "2011" }, { "name": "C\/C++", "level": "Advanced", "expirience": "2", "last_used": "2011" }, { "name": "C\/C++", "level": "Advanced", "expirience": "2", "last_used": "2011" }, { "name": "C\/C++", "level": "Advanced", "expirience": "2", "last_used": "2011" }, { "name": "C\/C++", "level": "Advanced", "expirience": "2", "last_used": "2011" } ], "Programming Technologies": [ { "name": "C\/C++", "level": "Advanced", "expirience": "2", "last_used": "2011" }, { "name": "C\/C++", "level": "Advanced", "expirience": "2", "last_used": "2011" } ], "Rade, Case, Tools, Applications, Methodologies": [ { "name": "C\/C++", "level": "Advanced", "expirience": "2", "last_used": "2011" }, { "name": "C\/C++", "level": "Advanced", "expirience": "2", "last_used": "2011" } ], "Internet Technologies": [ { "name": "C\/C++", "level": "Advanced", "expirience": "2", "last_used": "2011" }, { "name": "C\/C++", "level": "Advanced", "expirience": "2", "last_used": "2011" } ] }}'
+ * in this case json file will be created in folder $LARAVEL_PATH/tmp/
+ * than cv pdf file will be created in $LARAVEL_PATH/tmp/ folder too,
+ * and you can see full path file in returned json (in console output)
