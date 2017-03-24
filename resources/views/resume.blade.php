@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="{{ url('/') }}/css/reset.css">
     <link rel="stylesheet" href="{{ url('/') }}/css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+
     <style>
 
 
@@ -21,6 +21,7 @@
             font-weight: normal;
         }
     </style>
+    <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
 </head>
 <body>
 
