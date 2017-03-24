@@ -59,7 +59,7 @@ section {
     color: #000;
     font-size: 24px;
     font-family: PlayBold, sans-serif;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .pages1 .header p {
@@ -114,8 +114,7 @@ section {
     margin-left: 42px;
     margin-bottom: 10px;
     font-size: 14px;
-    font-family: 'Play', sans-serif;
-    font-weight: 300;
+    font-family: PlayBold, sans-serif;
 }
 /*end summary*/
 
