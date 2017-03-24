@@ -74,7 +74,7 @@ class CreatePdfFile extends Command
 //        } else {
 //            $filename = explode('.json', $this->argument('json'))[0];
 //        }
-        $snappy = new Pdf(base_path('/usr/local/bin/wkhtmltopdf'));
+        $snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
         $snappy->setOptions([
             'margin-bottom' => 0,
             'margin-left' => 0,
