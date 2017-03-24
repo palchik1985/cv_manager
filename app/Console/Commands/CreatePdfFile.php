@@ -67,8 +67,8 @@ class CreatePdfFile extends Command
     public function handle()
     {
 
-//        $snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
-        $snappy = new Pdf(base_path('vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64'));
+        $snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
+//        $snappy = new Pdf(base_path('vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64'));
         $snappy->setOptions([
             'margin-bottom' => 0,
             'margin-left' => 0,
@@ -84,46 +84,34 @@ class CreatePdfFile extends Command
         }
         if($this->option('file') ){
     
-            $output_file = '/tmp/123.pdf';
+            $output_file = $this->argument('outputfile');
             if(file_exists($output_file)){
                 unlink($output_file);
             }
             $snappy->generateFromHtml($html, $output_file);
             echo 'ok';
         } elseif($this->option('raw')){
-            dd(new Response(
-                $snappy->getOutputFromHtml($html),
-                200,
-                [
-                    'Content-Type'          => 'application/pdf',
-                    'Content-Disposition'   => 'attachment; filename="file.pdf"'
-                ]
-            ));
-            return new Response(
-                $snappy->getOutputFromHtml($html),
-                200,
-                [
-                    'Content-Type'          => 'application/pdf',
-                    'Content-Disposition'   => 'attachment; filename="file.pdf"'
-                ]
-            );
+//            dd(new Response(
+//                $snappy->getOutputFromHtml($html),
+//                200,
+//                [
+//                    'Content-Type'          => 'application/pdf',
+//                    'Content-Disposition'   => 'attachment; filename="file.pdf"'
+//                ]
+//            ));
+//            return new Response(
+//                $snappy->getOutputFromHtml($html),
+//                200,
+//                [
+//                    'Content-Type'          => 'application/pdf',
+//                    'Content-Disposition'   => 'attachment; filename="file.pdf"'
+//                ]
+//            );
             echo $snappy->getOutputFromHtml($html);die;
-//            $pdf = App::make('snappy.pdf.wrapper');
-//            $pdf = PDF::loadView('resume', ['data' => $start_array])->setOption()
-//            return $pdf->download('file.pdf');
-//            $pdf->loadHTML($html);
-//            $output = $pdf->inline();
-//            $pdf->download()
+
         }
         $snappy->generateFromHtml($html, $output_file);
-        echo 'ok';
-//        $snappy->generate(url($filename_for_browser), $outputfile);
-//        if(null == $this->option('file') || (!$this->option('file'))) {
-//                    unlink($filename . '.json');
-//        }
-//        if(null != $this->argument('outputfile')){
-//            echo json_encode(['status' => 'ok', 'filename' => $outputfile]);die;
-//        }
-//        echo json_encode(['status' => 'ok', 'filename' => $filename . '.pdf']);die;
+        die();
+
     }
 }
