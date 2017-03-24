@@ -5,6 +5,7 @@ body {
     min-width: 210mm;
     min-height: 297mm;
     font-weight: normal !important;
+    font-family: 'Play', sans-serif !important;
 }
 
 section {
@@ -33,10 +34,7 @@ section {
 }
 
 .pages1 .header-top {
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    /*justify-content: space-between;*/
-    /*flex-wrap: nowrap;*/
+
     height: 100px;
 }
 
@@ -44,7 +42,8 @@ section {
     margin: 28px 0 0 42px;
     font-size: 18px;
     color: rgb(58, 129, 186);
-    font-family: PlayBold, sans-serif;
+    font-family: Play, sans-serif;
+    font-weight: 900;
     float: left;
 }
 
