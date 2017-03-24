@@ -59,8 +59,8 @@ section {
     margin: 50px 0 0 42px;
     color: #000;
     font-size: 24px;
-    font-family: PlayBold, sans-serif;
-    font-weight: normal;
+    font-family: Play, sans-serif;
+    font-weight: 900;
 }
 
 .pages1 .header p {
@@ -115,7 +115,8 @@ section {
     margin-left: 42px;
     margin-bottom: 10px;
     font-size: 14px;
-    font-family: PlayBold, sans-serif;
+    font-family: Play, sans-serif;
+    font-weight: 900;
 }
 /*end summary*/
 
@@ -199,7 +200,8 @@ section {
     margin-bottom: 10px;
     vertical-align: top;
     font-size: 13px;
-    font-family: PlayBold, sans-serif;
+    font-family: Play, sans-serif;
+    font-weight: 900;
 }
 
 .pages2 .work span {

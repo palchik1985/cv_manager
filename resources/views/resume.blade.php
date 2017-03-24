@@ -8,27 +8,6 @@
     <link rel="stylesheet" href="{{ url('/') }}/css/reset.css">
     <link rel="stylesheet" href="{{ url('/') }}/css/style.css">
 
-    {{--<style>--}}
-        {{--@font-face {--}}
-            {{--font-family: "PlayRegular";--}}
-            {{--src: url("../fonts/PlayRegular.eot");--}}
-            {{--src: url("../fonts/PlayRegular.eot?#iefix")format("embedded-opentype"),--}}
-            {{--url("../fonts/PlayRegular.woff") format("woff"),--}}
-            {{--url("../fonts/PlayRegular.ttf") format("truetype");--}}
-            {{--font-style: normal;--}}
-            {{--font-weight: normal;--}}
-        {{--}--}}
-
-        {{--@font-face {--}}
-            {{--font-family: "PlayBold";--}}
-            {{--src: url("../fonts/PlayBold.eot");--}}
-            {{--src: url("../fonts/PlayBold.eot?#iefix")format("embedded-opentype"),--}}
-            {{--url("../fonts/PlayBold.woff") format("woff"),--}}
-            {{--url("../fonts/PlayBold.ttf") format("truetype");--}}
-            {{--font-style: normal;--}}
-            {{--font-weight: normal;--}}
-        {{--}--}}
-    {{--</style>--}}
 </head>
 <body>
 
