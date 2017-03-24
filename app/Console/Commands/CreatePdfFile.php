@@ -66,9 +66,8 @@ class CreatePdfFile extends Command
      */
     public function handle()
     {
-
-        $snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
-//        $snappy = new Pdf(base_path('vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64'));
+        $snappy = (env('APP_ENV') == 'production') ? new Pdf('/usr/local/bin/wkhtmltopdf') : new Pdf(base_path('vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64'));
+        
         $snappy->setOptions([
             'margin-bottom' => 0,
             'margin-left' => 0,
