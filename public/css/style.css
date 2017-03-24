@@ -43,7 +43,8 @@ section {
     margin: 28px 0 0 42px;
     font-size: 18px;
     color: rgb(58, 129, 186);
-    font-family: PlayBold, sans-serif;
+    font-family: 'Play', sans-serif;
+    font-weight: bold;
     float: left;
 }
 
@@ -58,7 +59,7 @@ section {
     margin: 50px 0 0 42px;
     color: #000;
     font-size: 24px;
-    font-family: PlayBold, sans-serif;
+    font-family: 'Play', sans-serif;
     font-weight: bold;
 }
 
@@ -66,7 +67,7 @@ section {
     margin: 16px 0 34px 42px;
     color: rgb(58, 129, 186);
     font-size: 18px;
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
 }
 /*end header*/
 
@@ -84,7 +85,7 @@ section {
     color: #fff;
     font-size: 24px;
     background: rgb(58, 129, 186);
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
 }
 
 .pages1 .sum-list {
@@ -96,7 +97,7 @@ section {
     line-height: 18px;
     font-size: 14px;
     list-style-type: disc;
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
     font-weight: normal;
 }
 
@@ -106,7 +107,7 @@ section {
     padding-bottom: 5px;
     color: #000;
     font-size: 24px;
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
     border-bottom: 2px solid rgb(255, 153, 0);
 }
 
@@ -114,7 +115,7 @@ section {
     margin-left: 42px;
     margin-bottom: 10px;
     font-size: 14px;
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
     font-weight: 300;
 }
 /*end summary*/
@@ -131,7 +132,7 @@ section {
     padding: 16px 0 0 42px;
     color: #fff;
     font-size: 13px;
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
 }
 /*end footer*/
 /*end .pages1*/
@@ -153,7 +154,7 @@ section {
     margin: 28px 0 0 42px;
     font-size: 16px;
     color: #000;
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
     float: left;
 }
 
@@ -182,14 +183,14 @@ section {
     color: #fff;
     font-size: 24px;
     background: rgb(58, 129, 186);
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
 }
 
 .pages2 .work h5 {
     margin: 28px 0 20px 42px;
     color: rgb(58, 129, 186);
     font-size: 18px;
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
 }
 
 .pages2 .work p {
@@ -199,7 +200,7 @@ section {
     margin-bottom: 10px;
     vertical-align: top;
     font-size: 13px;
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
     font-weight: bold;
 }
 
@@ -208,7 +209,7 @@ section {
     width: 350px;
     margin-bottom: 10px;
     font-size: 13px;
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
 }
 /*end work*/
 
@@ -224,7 +225,7 @@ section {
     padding: 16px 0 0 42px;
     color: #fff;
     font-size: 13px;
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
 }
 /*end footer*/
 /*end .pages2*/
@@ -248,7 +249,7 @@ section {
     line-height: 18px;
     font-size: 16px;
     color: #000;
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
     float: left;
 }
 
@@ -277,7 +278,7 @@ section {
     color: #fff;
     font-size: 24px;
     background: rgb(58, 129, 186);
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
 }
 
 .pages3 .program h2:nth-child(3) {
@@ -298,7 +299,7 @@ section {
     padding-bottom: 8px;
     font-size: 20px;
     color: rgb(58, 129, 186);
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
 }
 
 .pages3 table th span {
@@ -309,7 +310,7 @@ section {
     padding: 10px 0 0;
     color: #000;
     font-size: 13px;
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
 }
 
 .pages3 table tr:nth-child(2) td:nth-child(1) {
@@ -358,7 +359,7 @@ section {
     padding: 16px 0 0 42px;
     color: #fff;
     font-size: 13px;
-    font-family: PlayRegular, sans-serif;
+    font-family: 'Play', sans-serif;
 }
 /*end footer*/
 /*end .pages3*/
