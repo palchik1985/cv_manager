@@ -8,7 +8,19 @@
     <link rel="stylesheet" href="{{ url('/') }}/css/reset.css">
     <link rel="stylesheet" href="{{ url('/') }}/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+    <style>
 
+
+        @font-face {
+            font-family: "PlayBold";
+            src: url("{{ url('/') }}/fonts/PlayBold.eot");
+            src: url("{{ url('/') }}/fonts/PlayBold.eot?#iefix")format("embedded-opentype"),
+            url("{{ url('/') }}/fonts/PlayBold.woff") format("woff"),
+            url("{{ url('/') }}/fonts/PlayBold.ttf") format("truetype");
+            font-style: normal;
+            font-weight: normal;
+        }
+    </style>
 </head>
 <body>
 

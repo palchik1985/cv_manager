@@ -43,8 +43,7 @@ section {
     margin: 28px 0 0 42px;
     font-size: 18px;
     color: rgb(58, 129, 186);
-    font-family: 'Play', sans-serif;
-    font-weight: bold;
+    font-family: PlayBold, sans-serif;
     float: left;
 }
 
@@ -59,7 +58,7 @@ section {
     margin: 50px 0 0 42px;
     color: #000;
     font-size: 24px;
-    font-family: 'Play', sans-serif;
+    font-family: PlayBold, sans-serif;
     font-weight: bold;
 }
 
@@ -201,7 +200,7 @@ section {
     vertical-align: top;
     font-size: 13px;
     font-family: 'Play', sans-serif;
-    font-weight: 900;
+    font-weight: bold;
 }
 
 .pages2 .work span {
