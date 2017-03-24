@@ -1,4 +1,14 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Blank Developer</title>
+
+    <link rel="stylesheet" href="{{ url('/') }}/css/reset.css">
+    <link rel="stylesheet" href="{{ url('/') }}/css/style.css">
+</head>
+<body>
 
 @include('parts.pages1')
 <?php $work_expirience = array_chunk($data['work_expirience'], 2, true); ?>
@@ -9,3 +19,6 @@
 @foreach($lang_tools_techs as $languages_tools_technologies)
     @include('parts.pages3')
 @endforeach
+
+</body>
+</html>
