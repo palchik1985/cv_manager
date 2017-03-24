@@ -3,7 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Knp\Snappy\Pdf;
 
 /**
@@ -35,7 +38,7 @@ class CreatePdfFile extends Command
      * {outputfile} (optional) you can put name for output file (with full path)
      * WARNING! If file with same name exists - pdf file will be deleted!
      */
-    protected $signature = 'cv:generate {json} {outputfile?} {--file}';
+    protected $signature = 'cv:generate {json} {outputfile?} {--file} {--raw}';
 
     /**
      * The console command description.
@@ -63,41 +66,56 @@ class CreatePdfFile extends Command
      */
     public function handle()
     {
-//        if(null == $this->option('file') || (!$this->option('file'))) {
-//
-//            // create file
-//            $string = $this->argument('json');
-//            $filename = base_path('tmp/cv_' . mt_rand());
-//            $fp = fopen($filename.'.json', 'w');
-//            fwrite($fp, $string);
-//            fclose($fp);
-//        } else {
-//            $filename = explode('.json', $this->argument('json'))[0];
-//        }
-        $snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
+
+//        $snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
+        $snappy = new Pdf(base_path('vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64'));
         $snappy->setOptions([
             'margin-bottom' => 0,
             'margin-left' => 0,
             'margin-right' => 0,
             'margin-top' => 0,
         ]);
-//        $filename_for_browser = str_replace('/', '+', $filename);
-//        $filename_for_browser = '/test/'.$filename_for_browser.'.json';
-////        $filename = $this->argument('outputfile');
-//        if(null != $this->argument('outputfile')){
-//            $outputfile = $this->argument('outputfile');
-//        } else {
-//            $outputfile = $filename . '.pdf';
-//        }
-//        if(file_exists($outputfile)){
-//            unlink($outputfile);
-//        }
-//        if(!file_exists($filename . '.json')) {
-//            dd('no json file');
-//        }
+
         $start_array = json_decode($this->argument('json'), true);
         $html = View::make('resume', ['data' => $start_array])->render();
-        $snappy->generateFromHtml($html, '/tmp/123.pdf');
+        $output_file = '/tmp/123.pdf';
+        if(file_exists($output_file)){
+            unlink($output_file);
+        }
+        if($this->option('file') ){
+    
+            $output_file = '/tmp/123.pdf';
+            if(file_exists($output_file)){
+                unlink($output_file);
+            }
+            $snappy->generateFromHtml($html, $output_file);
+            echo 'ok';
+        } elseif($this->option('raw')){
+            dd(new Response(
+                $snappy->getOutputFromHtml($html),
+                200,
+                [
+                    'Content-Type'          => 'application/pdf',
+                    'Content-Disposition'   => 'attachment; filename="file.pdf"'
+                ]
+            ));
+            return new Response(
+                $snappy->getOutputFromHtml($html),
+                200,
+                [
+                    'Content-Type'          => 'application/pdf',
+                    'Content-Disposition'   => 'attachment; filename="file.pdf"'
+                ]
+            );
+            echo $snappy->getOutputFromHtml($html);die;
+//            $pdf = App::make('snappy.pdf.wrapper');
+//            $pdf = PDF::loadView('resume', ['data' => $start_array])->setOption()
+//            return $pdf->download('file.pdf');
+//            $pdf->loadHTML($html);
+//            $output = $pdf->inline();
+//            $pdf->download()
+        }
+        $snappy->generateFromHtml($html, $output_file);
         echo 'ok';
 //        $snappy->generate(url($filename_for_browser), $outputfile);
 //        if(null == $this->option('file') || (!$this->option('file'))) {
