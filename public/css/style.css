@@ -4,7 +4,7 @@ body {
     background: none;
     min-width: 210mm;
     min-height: 297mm;
-    font-weight: normal;
+    font-weight: normal !important;
 }
 
 section {
