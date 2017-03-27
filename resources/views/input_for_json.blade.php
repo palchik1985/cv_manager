@@ -6,18 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Create resume</title>
-    <style>
-        body {
-            font-size: 18px;
-        }
-        h2 {
-            font-size: 24px;
-        }
-        button {
-            font-size: 18px;
-            padding: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="http://yegor256.github.io/tacit/tacit.min.css"/>
+
 </head>
 <body>
 <h2>Json code for resume:</h2>

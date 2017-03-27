@@ -17,15 +17,15 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Knp\Snappy\Pdf;
 
-Route::get('/', function () {
-    
-    return view('welcome');
-});
+//Route::get('/', function () {
+//
+//    return view('welcome');
+//});
 
-Route::get('test', function(){
+Route::get('/', function(){
    return view('input_for_json');
 });
-Route::post('test', function () {
+Route::post('/', function () {
     
 //    $filename = str_replace('+', '/', $filename);
 //    $json = file_get_contents($filename);
