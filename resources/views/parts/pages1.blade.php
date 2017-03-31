@@ -22,7 +22,7 @@
             @endforeach
         </div>
         <footer class="footer">
-            <h5>ITRex Group</h5>
+            <h5>{{ $data['footer_text'] }}</h5>
         </footer>
     </div>
 </section><!--end pages1-->

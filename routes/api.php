@@ -16,3 +16,17 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('getlist', function(){
+    
+    return \App\Models\Cv::all();
+});
+
+Route::get('getcv/{id}', function($id){
+    
+    return \App\Models\Cv::find($id)->first();
+});
+//Route::post('add', function () {
+//    dd(request('json'));
+//});
+Route::post('add', 'Controller@save');
