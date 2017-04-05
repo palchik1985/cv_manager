@@ -30,3 +30,9 @@ Route::get('getcv/{id}', function($id){
 //    dd(request('json'));
 //});
 Route::post('add', 'Controller@save');
+
+Route::get('delete/{id}', function($id){
+    \App\Models\Cv::where('id', $id)->delete();
+    
+    return ['message' => 'deleted'];
+});

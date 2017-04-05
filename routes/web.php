@@ -62,3 +62,4 @@ Route::post('/', function () {
 Route::get('admin', function(){
     return view('admin.index');
 });
+

@@ -6,8 +6,8 @@
         </header>
         <div class="program">
 
-            @foreach($languages_tools_technologies as $name => $section)
-                <h2>{{ strtoupper($name) }}</h2>
+            @foreach($languages_tools_technologies as $section)
+                <h2>{{ strtoupper($section['name']) }}</h2>
                 <table>
                     <tr>
                         <th class="col-1">Name</th>
@@ -15,7 +15,7 @@
                         <th class="col-3">Experience <span>years</span></th>
                         <th class="col-4">Last used <span>year</span></th>
                     </tr>
-                    @foreach($section as $block)
+                    @foreach($section['fields'] as $block)
                         <tr>
                             @foreach($block as $item)
                                     <td>{{ $item }}</td>

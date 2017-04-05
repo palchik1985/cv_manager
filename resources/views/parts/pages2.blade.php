@@ -7,7 +7,7 @@
         <div class="work">
             <h2>WORK EXPERIENCE</h2>
             @foreach($data_expirience as $expirience_item)
-                <h5>{{ $expirience_item['dates']['date_start'] }} - {{ $expirience_item['dates']['date_end'] }}</h5>
+                <h5>{{ $expirience_item['date_start'] }} - {{ $expirience_item['date_end'] }}</h5>
                 <ul class="work-list">
                     @foreach($expirience_item['fields'] as $field)
                         <li>
