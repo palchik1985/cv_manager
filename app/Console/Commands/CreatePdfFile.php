@@ -90,24 +90,7 @@ class CreatePdfFile extends Command
             $snappy->generateFromHtml($html, $output_file);
             echo 'ok';
         } elseif($this->option('raw')){
-//            dd(new Response(
-//                $snappy->getOutputFromHtml($html),
-//                200,
-//                [
-//                    'Content-Type'          => 'application/pdf',
-//                    'Content-Disposition'   => 'attachment; filename="file.pdf"'
-//                ]
-//            ));
-//            return new Response(
-//                $snappy->getOutputFromHtml($html),
-//                200,
-//                [
-//                    'Content-Type'          => 'application/pdf',
-//                    'Content-Disposition'   => 'attachment; filename="file.pdf"'
-//                ]
-//            );
             echo $snappy->getOutputFromHtml($html);die;
-
         }
         $snappy->generateFromHtml($html, $output_file);
         die();

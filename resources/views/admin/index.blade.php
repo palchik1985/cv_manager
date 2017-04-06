@@ -26,8 +26,8 @@
         <div class="nav-wrapper blue ">
             <img class="brand-logo right" style="margin:10px;color:white" src="{{ url('/') }}/img/itrex-logo.svg" alt="ITRex">
             <ul id="nav-mobile" class="left hide-on-med-and-down">
-                <li><router-link to="/list"><i class="left material-icons">toc</i>Home</router-link></li>
-                <li><router-link to="/add"><i class="left material-icons">add</i>Add new</router-link></li>
+                <li><router-link to="/list"><i class="left material-icons">toc</i>List</router-link></li>
+                <li><router-link to="/edit"><i class="left material-icons">add</i>Add new</router-link></li>
                 <li>
                     <form>
                         <div class="input-field">
@@ -57,6 +57,10 @@
 <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script src="https://cdn.jsdelivr.net/vee-validate/2.0.0-beta.25/vee-validate.min.js"></script>
+<script>
+    Vue.use(VeeValidate); // good to go.
+</script>
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="/js/app.js"></script>

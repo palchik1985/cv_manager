@@ -24,85 +24,84 @@ class Errors {
     }
 }
 
-class Form {
-    constructor(data) {
-        this.data = data;
-
-        for(let field in data) {
-            this[field] = data[field];
-        }
-
-        this.errors = new Errors();
-    }
-
-    reset() {
-
-    }
-
-    submit() {
-        //axios
-    }
-
-
-
-}
-
-
 const List = Vue.component('cv-list', {
     template: `
 <table class="highlight">
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Created</th>
-        <th>Updated</th>
-        <th>Action</th>
+        <th v-for="column in columns">
+         <a href="#" v-on:click="sortBy(column, reverse)" :class="">{{ column | capitalize }}</a>
+        </th>
     </tr>
     </thead>
+    <transition name="fade">
+        <tbody>
+            <tr v-for="(cvrow, index) in cvlist">
+                <td v-text="cvrow.name"></td>
+                <td v-text="cvrow.created_at"></td>
+                <td v-text="cvrow.updated_at"></td>
+                <td>
+                     <a :href="'showCv/'+cvrow.id"><i class="small material-icons">visibility</i></a>
+                     <a :href="'getPdf/'+cvrow.id"><i class="small material-icons">play_for_work</i></a>
+                     <router-link :to="'/edit/'+ cvrow.id + '/1'"><i class="small material-icons">playlist_add</i></router-link>
+                     <router-link :to="'/edit/'+ cvrow.id"><i class="small material-icons">mode_edit</i></router-link>
+                     <a href="javascript:void(0)" v-on:click="deleteCv(cvrow, index)"><i class="small material-icons">delete</i></a>
+                </td>
+            </tr>
 
-    <tbody>
-        <tr v-for="(cvrow, index) in cvlist">
-            <td v-text="cvrow.name"></td>
-            <td v-text="cvrow.created_at"></td>
-            <td v-text="cvrow.updated_at"></td>
-            <td>
-                 <a :href="'showCv/'+cvrow.id"><i class="small material-icons">visibility</i></a>
-                 <a :href="'getPdf/'+cvrow.id"><i class="small material-icons">play_for_work</i></a>
-                 <a href="#" class="" v-on:click="addFromCopy(cvrow)"><i class="small material-icons">playlist_add</i></a>
-                 <a href="#" class="" v-on:click="editCv(cvrow)"><i class="small material-icons">mode_edit</i></a>
-                 <a href="javascript:void(0)" v-on:click="deleteCv(cvrow, index)"><i class="small material-icons">delete</i></a>
-            </td>
-        </tr>
 
-
-    </tbody>
+        </tbody>
+    </transition>
+    
 </table>
     `,
     data() {
 
-        return { cvlist: [] }
+        return {
+            cvlist: [],
+            sortKey: 'name',
+            reverse: false,
+            columns: ['name', 'created_at', 'updated_at', 'action'],
+            searchText: ''
+
+        }
     },
     created(){
-        axios.get('/api/getlist').then(response => this.cvlist = response.data);
+        this.getData();
+    },
+    filters: {
+        capitalize: function (str) {
+            return str.toUpperCase().replace('_', ' ');
+        }
     },
     methods: {
 
-        addFromCopy: function(cv) {
-            alert('addFromCopy');
+        sortBy: function(sortKey, reverse) {
+            this.cvlist.sort(function (a, b) {
+                if (a[sortKey] > b[sortKey]) {
+                    return (reverse) ? -1 : 1
+                }
+                if (a[sortKey] < b[sortKey]) {
+                    return (reverse) ? 1 : -1;
+                }
+                return 0;
+            });
+            this.reverse = !this.reverse;
         },
-        editCv: function(cv) {
-            alert('edit');
+
+        getData() {
+            axios.get('/api/getlist').then(response => this.cvlist = response.data)
         },
         deleteCv: function(cv, index) {
             axios.get('/api/delete/'+cv.id);
             this.cvlist.splice(index, 1);
-            axios.get('/api/getlist').then(response => this.cvlist = response.data);
+            this.getData();
         }
     }
 
 });
 
-const Add = {
+const Edit = {
     template: `
 <div class="row">
     <form method="POST" action="/api/add" class="col s12" @submit.prevent="onSubmit" @keydown="errors.clear($event.target.name)">
@@ -111,22 +110,22 @@ const Add = {
         <h5>Basic information</h5>
         <div class="row">
             <div class="input-field col s6">
-                <input type="text" class="validate" id="header_text" name="header_text" v-model="header_text">
+                <input type="text" class="validate" id="header_text" name="header_text" v-model="cvdata.header_text">
                 <label for="header_text">Header text</label>
             </div>
             <div class="input-field col s6">
-                <input type="text" class="validate" id="footer_text" name="footer_text" v-model="footer_text">
+                <input type="text" class="validate" id="footer_text" name="footer_text" v-model="cvdata.footer_text">
                 <label for="footer_text">Footer text</label>
             </div>
         </div>
         
         <div class="row">
             <div class="input-field col s6">
-                <input type="text" class="validate" v-bind:class="{ invalid: errors.get('name')}" id="name" name="name" v-model="name">
+                <input type="text" class="validate" v-bind:class="{ invalid: errors.get('name')}" id="name" name="name" v-model="cvdata.name">
                 <label for="name" v-bind:data-error="errors.get('name')">Name</label>
             </div>
             <div class="input-field col s6">
-                <input type="text" class="validate" id="position"  name="position" v-model="position">
+                <input type="text" class="validate" id="position"  name="position" v-model="cvdata.position">
                 <label for="position" >Position</label>
             </div>
         </div>
@@ -139,10 +138,10 @@ const Add = {
                     
                     <ul class="row">
                         <summary-item is="summary-item"
-                            v-for="(detail, index) in summary.summary_details"
+                            v-for="(detail, index) in cvdata.summary.summary_details"
                             v-bind:key="detail"
                             v-bind:title="detail"
-                            v-on:remove="summary.summary_details.splice(index, 1)"
+                            v-on:remove="cvdata.summary.summary_details.splice(index, 1)"
                             class="col s9"
                         >
                         </summary-item>
@@ -164,10 +163,10 @@ const Add = {
                     <span class="card-title">Summary technologies</span>
                     <ul class="row">
                         <summary-item is="summary-item"
-                            v-for="(technology, index) in summary.technologies"
+                            v-for="(technology, index) in cvdata.summary.technologies"
                             v-bind:key="technology"
                             v-bind:title="technology"
-                            v-on:remove="summary.technologies.splice(index, 1)"
+                            v-on:remove="cvdata.summary.technologies.splice(index, 1)"
                             class="col s9"
                         ></summary-item>
                             
@@ -192,10 +191,10 @@ const Add = {
                 <h5>Work expirience</h5>
                 <work-expirience class="col s12 card"
                     is="expirience-item"
-                    v-for="(expirience, index) in work_expirience"
+                    v-for="(expirience, index) in cvdata.work_expirience"
                     v-bind:key="expirience"
                     v-bind:expirience="expirience"
-                    v-on:remove="work_expirience.splice(index, 1)"
+                    v-on:remove="cvdata.work_expirience.splice(index, 1)"
                 >
                     <expirienceItemfield class="col s12"
                         is="expirience-item-field"
@@ -219,10 +218,10 @@ const Add = {
                 <h5>Advanced information </h5>
                 <tooltechItem class="col s12 card"
                     is="tooltechItem"
-                    v-for="(tooltech, index) in languages_tools_technologies"
+                    v-for="(tooltech, index) in cvdata.languages_tools_technologies"
                     v-bind:key="tooltech"
                     v-bind:tooltech="tooltech"
-                    v-on:remove="languages_tools_technologies.splice(index, 1)"
+                    v-on:remove="cvdata.languages_tools_technologies.splice(index, 1)"
                 >
                     <tooltechItemField class="col s12"
                         is="tooltechItemField"
@@ -311,75 +310,127 @@ const Add = {
 
             errors: new Errors(),
             json: {},
-            name: '',
-            header_text: '',
-            footer_text: 'ITREX Group',
-            position: '',
-            summary:
-                {
-                    summary_details: [],
-                    technologies: []
-                },
-            work_expirience: [],
-            languages_tools_technologies: [
-                {
-                    name: 'Programming Languages',
-                    fields: [
-                        {
-                            name: '',
-                            level: '',
-                            expirience: '',
-                            last_used: ''
-                        }
-                    ]
-                },
-                {
-                    name: 'Programming Technologies',
-                    fields: [
-                        {
-                            name: '',
-                            level: '',
-                            expirience: '',
-                            last_used: ''
-                        }
-                    ]
-                }
-            ]
+            cvdata: {
+                name: '',
+                header_text: '',
+                footer_text: 'ITREX Group',
+                position: '',
+                summary:
+                    {
+                        summary_details: [],
+                        technologies: []
+                    },
+                work_expirience: [],
+                languages_tools_technologies: [
+                    {
+                        name: 'Programming Languages',
+                        fields: [
+                            {
+                                name: '',
+                                level: '',
+                                expirience: '',
+                                last_used: ''
+                            }
+                        ]
+                    },
+                    {
+                        name: 'Programming Technologies',
+                        fields: [
+                            {
+                                name: '',
+                                level: '',
+                                expirience: '',
+                                last_used: ''
+                            }
+                        ]
+                    }
+                ]
+            }
+
         };
 
     },
+    created(){
+        this.updateData();
+    },
+
     methods: {
+        updateData(){
+            if(this.$route.params.id){
+                axios.get('/api/getcv/'+this.$route.params.id).then(response => {
+                    let json = JSON.parse(response.data.json);
+                    this.cvdata = {
+                        name: (typeof json.name !== "undefined" && typeof this.$route.params.addfrom === "undefined") ? json.name : '',
+                        header_text: (typeof json.header_text !== "undefined") ? json.header_text : '',
+                        footer_text: (typeof json.footer_text !== "undefined") ? json.footer_text : 'ITREX Group',
+                        position: (typeof json.position !== "undefined") ? json.position : '',
+                        summary:
+                            {
+                                summary_details: (typeof json.summary !== "undefined" && json.summary.summary_details) ? json.summary.summary_details : [],
+                                technologies: (typeof json.summary !== "undefined" && json.summary.technologies) ? json.summary.technologies : []
+                            },
+                        work_expirience: (typeof json.work_expirience !== "undefined") ? json.work_expirience : [],
+                        languages_tools_technologies: (typeof json.languages_tools_technologies !== "undefined") ? json.languages_tools_technologies : [
+                            {
+                                name: 'Programming Languages',
+                                fields: [
+                                    {
+                                        name: '',
+                                        level: '',
+                                        expirience: '',
+                                        last_used: ''
+                                    }
+                                ]
+                            },
+                            {
+                                name: 'Programming Technologies',
+                                fields: [
+                                    {
+                                        name: '',
+                                        level: '',
+                                        expirience: '',
+                                        last_used: ''
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                });
+            }
+        },
         onSubmit() {
             let json = {
-                header_text: this.header_text,
-                footer_text: this.footer_text,
-                name: this.name,
-                position: this.position,
-                summary: this.summary,
-                work_expirience: this.work_expirience,
-                languages_tools_technologies: this.languages_tools_technologies
+                header_text: this.cvdata.header_text,
+                footer_text: this.cvdata.footer_text,
+                name: this.cvdata.name,
+                position: this.cvdata.position,
+                summary: this.cvdata.summary,
+                work_expirience: this.cvdata.work_expirience,
+                languages_tools_technologies: this.cvdata.languages_tools_technologies
             };
+            id = (this.$route.params.id && typeof this.$route.params.addfrom === "undefined") ? this.$route.params.id : '';
 
              axios.post('/api/add', {
-                 name: this.name,
+                 id: id,
+                 name: this.cvdata.name,
                  json: json
              })
-                 .then(response => alert('Saved'))
+                 .then(router.push('/'))
                  .catch(error => this.errors.record(error.response.data));
-             console.log(json);
+
         },
         addSummaryDetail(){
-            this.summary.summary_details.push(this.newSummaryDetail);
+            this.cvdata.summary.summary_details.push(this.newSummaryDetail);
             this.newSummaryDetail = '';
         },
         addSummaryTechnology(){
-            this.summary.technologies.push(this.newSummaryTechnology);
+            this.cvdata.summary.technologies.push(this.newSummaryTechnology);
             this.newSummaryTechnology = '';
         },
 
         // work_expirience:
         addExpirienceItem(){
-            this.work_expirience.push(this.newExpirienceItem);
+            this.cvdata.work_expirience.push(this.newExpirienceItem);
             this.newExpirienceItem = {
                 date_start: '',
                 date_end: '',
@@ -416,19 +467,19 @@ const Add = {
             };
         },
         addExpirienceItemField(index){
-            this.work_expirience[index].fields.push(this.newExpirienceItemField);
+            this.cvdata.work_expirience[index].fields.push(this.newExpirienceItemField);
             this.newExpirienceItemField = {
                 name: '',
                 value: ''
             };
         },
         removeExpirienceItemField(mainindex, itemindex){
-            this.work_expirience[mainindex].fields.splice(itemindex, 1);
+            this.cvdata.work_expirience[mainindex].fields.splice(itemindex, 1);
         },
 
         // languages_tools_technologies:
         addTooltechItem(){
-            this.languages_tools_technologies.push(this.newTooltechItem);
+            this.cvdata.languages_tools_technologies.push(this.newTooltechItem);
             this.newTooltechItem = {
                 name: '',
                 fields: [
@@ -442,7 +493,7 @@ const Add = {
             }
         },
         addTooltechItemField(index){
-            this.languages_tools_technologies[index].fields.push(this.newTooltechItemField);
+            this.cvdata.languages_tools_technologies[index].fields.push(this.newTooltechItemField);
             this.newTooltechItemField = {
                 name: '',
                 level: '',
@@ -549,15 +600,16 @@ Vue.component('tooltechItemField', {
 });
 
 const routes = [
+    { path: '/', redirect: '/list'},
     { path: '/list', component: List },
-    { path: '/add', component: Add },
+    { path: '/edit/:id?/:addfrom?', component: Edit },
     // { path: '/edit', component: Edit },
 ];
 const router = new VueRouter({
     routes
 });
 
-new Vue({
+var app = new Vue({
     el: '#root',
     router,
 

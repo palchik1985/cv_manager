@@ -15,18 +15,30 @@ class Controller extends BaseController
     
     
     
-    public function save(){
-        
+    public function create(){
+        $id = request('id');
         $this->validate(request(), [
             'name' => 'required',
         ]);
-        Cv::create([
-            'name' => request('name'),
-            'json' => json_encode(request('json')),
-        ]);
         
-        return ['message' => 'created'];
-    }
+        if(!empty($id)){
+            // update
+            Cv::where('id', request('id'))->update([
+                'name' => request('name'),
+                'json' => json_encode(request('json'))
+            ]);
+            return ['message' => 'updated'];
+            
+        } else {
+            // create
+            Cv::create([
+                'name' => request('name'),
+                'json' => json_encode(request('json')),
+            ]);
     
+            return ['message' => 'created'];
+        }
+        
+    }
     
 }
