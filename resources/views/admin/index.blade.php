@@ -27,7 +27,7 @@
 <div class="container" id="root">
     <nav>
         <div class="nav-wrapper blue ">
-            <img id="brand-logo" class="brand-logo right" src="{{ url('/') }}/img/itrex-logo.svg" alt="ITRex"/>
+            <img id="brand-logo" class="brand-logo right" src="{{ url('/') }}/img/itrex-logo-admin.svg" alt="ITRex"/>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
                 <li><router-link to="/list"><i class="left material-icons">toc</i>List</router-link></li>
                 <li><router-link to="/edit"><i class="left material-icons">add</i>Add new</router-link></li>
