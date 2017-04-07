@@ -26,34 +26,43 @@ class Errors {
 
 const List = Vue.component('cv-list', {
     template: `
-<table class="highlight">
-    <thead>
-    <tr>
-        <th v-for="column in columns">
-         <a href="#" v-on:click="sortBy(column, reverse)" :class="">{{ column | capitalize }}</a>
-        </th>
-    </tr>
-    </thead>
-    <transition name="fade">
-        <tbody>
-            <tr v-for="(cvrow, index) in cvlist">
-                <td v-text="cvrow.name"></td>
-                <td v-text="cvrow.created_at"></td>
-                <td v-text="cvrow.updated_at"></td>
-                <td>
-                     <a :href="'showCv/'+cvrow.id"><i class="small material-icons">visibility</i></a>
-                     <a :href="'getPdf/'+cvrow.id"><i class="small material-icons">play_for_work</i></a>
-                     <router-link :to="'/edit/'+ cvrow.id + '/1'"><i class="small material-icons">playlist_add</i></router-link>
-                     <router-link :to="'/edit/'+ cvrow.id"><i class="small material-icons">mode_edit</i></router-link>
-                     <a href="javascript:void(0)" v-on:click="deleteCv(cvrow, index)"><i class="small material-icons">delete</i></a>
-                </td>
-            </tr>
+        <div>
+            <div class="col s12 input-field">
+            
+                <i class="material-icons prefix">search</i>
+                <input type="search" class="validate" id="searchText" name="searchText" v-model="searchText" >
+                <label for="searchText">Search</label>
+            </div>
+            <table class="highlight">
+                <thead>
+                <tr>
+                    <th v-for="column in columns">
+                     <a href="#" v-on:click="sortBy(column, reverse)" :class="">{{ column | capitalize }}</a>
+                    </th>
+                </tr>
+                </thead>
+                <transition name="fade">
+                    <tbody>
+                        <tr v-for="(cvrow, index) in cvlist" v-show="searchedText(cvrow, searchText)">
+                            <td v-text="cvrow.name"></td>
+                            <td v-text="cvrow.created_at"></td>
+                            <td v-text="cvrow.updated_at"></td>
+                            <td>
+                                 <a :href="'showCv/'+cvrow.id"><i class="small material-icons">visibility</i></a>
+                                 <a :href="'getPdf/'+cvrow.id"><i class="small material-icons">play_for_work</i></a>
+                                 <router-link :to="'/edit/'+ cvrow.id + '/1'"><i class="small material-icons">playlist_add</i></router-link>
+                                 <router-link :to="'/edit/'+ cvrow.id"><i class="small material-icons">mode_edit</i></router-link>
+                                 <a href="javascript:void(0)" v-on:click="deleteCv(cvrow, index)"><i class="small material-icons">delete</i></a>
+                            </td>
+                        </tr>
 
 
-        </tbody>
-    </transition>
-    
-</table>
+                    </tbody>
+                </transition>
+                
+            </table>
+        </div>
+
     `,
     data() {
 
@@ -75,8 +84,10 @@ const List = Vue.component('cv-list', {
         }
     },
     methods: {
-
-        sortBy: function(sortKey, reverse) {
+        searchedText(object, searchText) {
+            return (object.name+object.created_at+object.updated_at).toLowerCase().indexOf(searchText) > -1;
+        },
+        sortBy(sortKey, reverse) {
             this.cvlist.sort(function (a, b) {
                 if (a[sortKey] > b[sortKey]) {
                     return (reverse) ? -1 : 1
@@ -98,7 +109,6 @@ const List = Vue.component('cv-list', {
             this.getData();
         }
     }
-
 });
 
 const Edit = {

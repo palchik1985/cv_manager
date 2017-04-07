@@ -15,7 +15,7 @@ class Controller extends BaseController
     
     
     
-    public function create(){
+    public function store(){
         $id = request('id');
         $this->validate(request(), [
             'name' => 'required',

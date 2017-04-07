@@ -27,7 +27,7 @@ Route::get('getcv/{id}', function($id){
     return Cv::where('id', $id)->first();
 });
 
-Route::post('add', 'Controller@create');
+Route::post('add', 'Controller@store');
 
 Route::get('delete/{id}', function($id){
     Cv::where('id', $id)->delete();

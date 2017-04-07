@@ -11,6 +11,9 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <style>
+        img#brand-logo {
+            margin: 10px;
+        }
         .mt-15 {
             margin-top: 15px;
         }
@@ -24,19 +27,19 @@
 <div class="container" id="root">
     <nav>
         <div class="nav-wrapper blue ">
-            <img class="brand-logo right" style="margin:10px;color:white" src="{{ url('/') }}/img/itrex-logo.svg" alt="ITRex">
+            <img id="brand-logo" class="brand-logo right" src="{{ url('/') }}/img/itrex-logo.svg" alt="ITRex"/>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
                 <li><router-link to="/list"><i class="left material-icons">toc</i>List</router-link></li>
                 <li><router-link to="/edit"><i class="left material-icons">add</i>Add new</router-link></li>
-                <li>
-                    <form>
-                        <div class="input-field">
-                            <input id="search" type="search" required>
-                            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                            <i class="material-icons">close</i>
-                        </div>
-                    </form>
-                </li>
+                {{--<li>--}}
+                    {{--<form>--}}
+                        {{--<div class="input-field">--}}
+                            {{--<input id="search" type="search" v-model="searchText" required>--}}
+                            {{--<label class="label-icon" for="search"><i class="material-icons">search</i></label>--}}
+                            {{--<i class="material-icons">close</i>--}}
+                        {{--</div>--}}
+                    {{--</form>--}}
+                {{--</li>--}}
             </ul>
 
 
@@ -59,7 +62,7 @@
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 <script src="https://cdn.jsdelivr.net/vee-validate/2.0.0-beta.25/vee-validate.min.js"></script>
 <script>
-    Vue.use(VeeValidate); // good to go.
+    Vue.use(VeeValidate);
 </script>
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
