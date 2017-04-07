@@ -13,6 +13,7 @@
 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Knp\Snappy\Pdf;
@@ -64,7 +65,7 @@ Route::get('/', function() {
 });
 Route::get('admin', function(){
     return view('admin.index');
-})->name('admin');
+})->name('admin')->middleware('auth');
 
 Route::get('showCv/{id}', function($id){
     $cv = \App\Models\Cv::where('id', $id)->first();
@@ -106,3 +107,11 @@ Route::get('getPdf/{id}', function($id){
     );
     
 });
+
+Auth::routes();
+
+Route::get('logout', function(){
+    Auth::logout();
+    return redirect()->route('admin');
+});
+

@@ -31,15 +31,10 @@
             <ul id="nav-mobile" class="left hide-on-med-and-down">
                 <li><router-link to="/list"><i class="left material-icons">toc</i>List</router-link></li>
                 <li><router-link to="/edit"><i class="left material-icons">add</i>Add new</router-link></li>
-                {{--<li>--}}
-                    {{--<form>--}}
-                        {{--<div class="input-field">--}}
-                            {{--<input id="search" type="search" v-model="searchText" required>--}}
-                            {{--<label class="label-icon" for="search"><i class="material-icons">search</i></label>--}}
-                            {{--<i class="material-icons">close</i>--}}
-                        {{--</div>--}}
-                    {{--</form>--}}
-                {{--</li>--}}
+            </ul>
+            <ul class="right" style="margin-right: 150px">
+                <li><a href="/logout">Logout</a></li>
+                <li><a href="/register">Register new user</a></li>
             </ul>
 
 
