@@ -48,11 +48,11 @@ const List = Vue.component('cv-list', {
                             <td v-text="cvrow.created_at"></td>
                             <td v-text="cvrow.updated_at"></td>
                             <td>
-                                 <a :href="'showCv/'+cvrow.id"><i class="small material-icons">visibility</i></a>
-                                 <a :href="'getPdf/'+cvrow.id"><i class="small material-icons">play_for_work</i></a>
-                                 <router-link :to="'/edit/'+ cvrow.id + '/1'"><i class="small material-icons">playlist_add</i></router-link>
-                                 <router-link :to="'/edit/'+ cvrow.id"><i class="small material-icons">mode_edit</i></router-link>
-                                 <a href="javascript:void(0)" v-on:click="deleteCv(cvrow, index)"><i class="small material-icons">delete</i></a>
+                                 <a :href="'showCv/'+cvrow.id" title="show in browser"><i class="small material-icons">visibility</i></a>
+                                 <a :href="'getPdf/'+cvrow.id" title="download pdf"><i class="small material-icons">play_for_work</i></a>
+                                 <router-link :to="'/edit/'+ cvrow.id + '/1'" title="add from copy"><i class="small material-icons">playlist_add</i></router-link>
+                                 <router-link :to="'/edit/'+ cvrow.id" title="edit"><i class="small material-icons">mode_edit</i></router-link>
+                                 <a href="javascript:void(0)" v-on:click="deleteCv(cvrow, index)" title="delete"><i class="small material-icons">delete</i></a>
                             </td>
                         </tr>
 
