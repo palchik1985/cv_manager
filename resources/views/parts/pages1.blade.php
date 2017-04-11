@@ -17,9 +17,16 @@
                 @endforeach
             </ul>
             <h3>TECHNOLOGIES</h3>
-            @foreach($data['summary']['technologies'] as $line)
-                <p>{{$line}}</p>
-            @endforeach
+            <div class="column1"
+            @if(count($data['summary']['technologies']) > 20)
+                style="column-count:2;"
+            @endif
+            >
+                @foreach($data['summary']['technologies'] as $line)
+                    <p>{{$line}}</p>
+                @endforeach
+            </div>
+
         </div>
         <footer class="footer">
             <h5>{{ $data['footer_text'] }}</h5>
