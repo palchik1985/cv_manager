@@ -157,22 +157,29 @@ const Edit = Vue.component('cv-edit', {
                             v-for="(detail, index) in cvdata.summary.summary_details"
                             v-bind:key="index"
                             v-bind:title="detail"
+                            v-on:edit="editDetail(index)"
                             v-on:moveUp="moveElementUp(cvdata.summary.summary_details, index)"
                             v-on:moveDown="moveElementDown(cvdata.summary.summary_details, index)"
                             v-on:remove="cvdata.summary.summary_details.splice(index, 1)"
-                            class="col s9"
+                            class="col s12"
                         >
                         </summary-item>
                     </ul> 
-                    
-                    <div class="input-field">
-                        <input class="col s11" type="text"
-                        v-model="newSummaryDetail"
-                        name="summarydetails"
-                        >
-                        <label for="summarydetails">Add new summary detail</label>
-                        <a href="javascript:void(0)" v-on:click="addSummaryDetail"><i style="margin-top:10px" class="material-icons">add</i></a>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <a class="col s1" href="#" v-on:click.prevent="addSummaryDetailFirst" title="add to first"><i style="margin-top:10px" class="material-icons">add</i></a>
+                            <input type="text"
+                            class="col s9"
+                            v-model="newSummaryDetail"
+                            name="summarydetails"
+                            >
+                            <label for="summarydetails">Add new summary detail</label>
+                            <a class="col s1" href="#" v-on:click.prevent="addSummaryDetail" title="add to last"><i style="margin-top:10px" class="material-icons">add</i></a>
+                            
+                        </div>
+                        
                     </div>
+                    
                 </div>
                 
             </div>
@@ -184,20 +191,35 @@ const Edit = Vue.component('cv-edit', {
                             v-for="(technology, index) in cvdata.summary.technologies"
                             v-bind:key="index"
                             v-bind:title="technology"
-                            v-on:moveUp="moveElementUp(cvdata.summary.summary_details, index)"
-                            v-on:moveDown="moveElementDown(cvdata.summary.summary_details, index)"
+                            v-on:edit="editTechnology(index)"
+                            v-on:moveUp="moveElementUp(cvdata.summary.technologies, index)"
+                            v-on:moveDown="moveElementDown(cvdata.summary.technologies, index)"
                             v-on:remove="cvdata.summary.technologies.splice(index, 1)"
-                            class="col s9"
+                            class="col s12"
                         ></summary-item>
                             
                     </ul> 
-                    <div class="input-field">
-                        <input class="col s11" type="text"
-                        name="summarytechnologies"
-                        v-model="newSummaryTechnology"
-                        >
-                        <label for="summarytechnologies">Add new summary technology</label>
-                        <a href="javascript:void(0)" v-on:click="addSummaryTechnology"><i style="margin-top:10px" class="material-icons">add</i></a>
+                    <!--<div class="input-field">-->
+                        <!--<input class="col s11" type="text"-->
+                        <!--name="summarytechnologies"-->
+                        <!--v-model="newSummaryTechnology"-->
+                        <!--&gt;-->
+                        <!--<label for="summarytechnologies">Add new summary technology</label>-->
+                        <!--<a href="javascript:void(0)" v-on:click="addSummaryTechnology"><i style="margin-top:10px" class="material-icons">add</i></a>-->
+                    <!--</div>-->
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <a class="col s1" href="#" v-on:click.prevent="addSummaryTechnologyFirst" title="add to first"><i style="margin-top:10px" class="material-icons">add</i></a>
+                            <input type="text"
+                            class="col s9"
+                            v-model="newSummaryTechnology"
+                            name="summarytechnologies"
+                            >
+                            <label for="summarytechnologies">Add new summary detail</label>
+                            <a class="col s1" href="#" v-on:click.prevent="addSummaryTechnology" title="add to last"><i style="margin-top:10px" class="material-icons">add</i></a>
+                            
+                        </div>
+                        
                     </div>
                     
                 </div>
@@ -223,7 +245,7 @@ const Edit = Vue.component('cv-edit', {
                         v-for="(expirienceitem, expirienceindex) in expirience.fields"
                         v-bind:key="expirienceitem"
                         v-bind:expirienceitem="expirienceitem"
-                        v-on:remove="removeExpirienceItemField(index, expirienceindex)"
+                        v-on:remove="cvdata.work_expirience[index].fields.splice(expirienceindex, 1)"
                         
                     ></expirienceItemfield>
                     <div class="col s12 card-action">
@@ -252,14 +274,14 @@ const Edit = Vue.component('cv-edit', {
                         v-for="(tooltechField, toolfieldindex) in tooltech.fields"
                         v-bind:key="tooltechField"
                         v-bind:tooltechField="tooltechField"
-                        v-on:remove="removeTooltechItemField(index, toolfieldindex)">
+                        v-on:remove="cvdata.languages_tools_technologies[index].fields.splice(toolfieldindex, 1)">
                     
                     </tooltechItemField>
                     <div class="col s12 card-action">
-                        <a href="javascript:void(0)" v-on:click="addTooltechItemField(index)">Add new row</a>
+                        <a href="#" v-on:click.prevent="addTooltechItemField(index)">Add new row</a>
                     </div> 
                 </tooltechItem>
-                <a href="javascript:void(0)" v-on:click="addTooltechItem">Add new Tool/Lang/Technology</a>
+                <a href="#" v-on:click.prevent="addTooltechItem">Add new Tool/Lang/Technology</a>
             </div>
         </div>
         
@@ -463,13 +485,35 @@ const Edit = Vue.component('cv-edit', {
                 }
             }
         },
+
+        // summary
         addSummaryDetail(){
             this.cvdata.summary.summary_details.push(this.newSummaryDetail);
             this.newSummaryDetail = '';
         },
+        addSummaryDetailFirst(){
+            this.cvdata.summary.summary_details.unshift(this.newSummaryDetail);
+            this.newSummaryDetail = '';
+        },
+        editDetail(index) {
+            if(this.cvdata.summary.summary_details[index]){
+                this.newSummaryDetail = this.cvdata.summary.summary_details[index];
+                this.cvdata.summary.summary_details.splice(index, 1);
+            }
+        },
         addSummaryTechnology(){
             this.cvdata.summary.technologies.push(this.newSummaryTechnology);
             this.newSummaryTechnology = '';
+        },
+        addSummaryTechnologyFirst(){
+            this.cvdata.summary.technologies.unshift(this.newSummaryTechnology);
+            this.newSummaryTechnology = '';
+        },
+        editTechnology(index){
+            if(this.cvdata.summary.technologies[index]){
+                this.newSummaryTechnology = this.cvdata.summary.technologies[index];
+                this.cvdata.summary.technologies.splice(index, 1);
+            }
         },
 
         // work_expirience:
@@ -552,8 +596,9 @@ Vue.component('summary-item', {
     template: `
         <li>
             <div class="chip">{{ title }} 
-                <i class="material-icons" style="transform: rotate(270deg);position:relative;top:6px;left:3px;cursor:pointer;" v-on:click.prevent="$emit('moveUp')">play_arrow</i>
-                <i class="material-icons" style="transform: rotate(90deg);position:relative;top:3px;left:3px;cursor:pointer;" v-on:click.prevent="$emit('moveDown')">play_arrow</i>
+                <i class="tiny material-icons" style="transform: rotate(270deg);position:relative;top:4px;cursor:pointer;" v-on:click.prevent="$emit('moveUp')">play_arrow</i>
+                <i class="tiny material-icons" style="transform: rotate(90deg);position:relative;top:2px;cursor:pointer;" v-on:click.prevent="$emit('moveDown')">play_arrow</i>
+                <i class="tiny material-icons" style="top:3px;position:relative;left:3px;cursor:pointer" v-on:click="$emit('edit')">mode_edit</i>
                 <i class="close material-icons" v-on:click="$emit('remove')">close</i>
             </div> 
         </li>
