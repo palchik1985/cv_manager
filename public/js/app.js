@@ -41,24 +41,30 @@ const List = Vue.component('cv-list', {
                     </th>
                 </tr>
                 </thead>
-                <transition name="fade">
-                    <tbody>
-                        <tr v-for="(cvrow, index) in cvlist" v-show="searchedText(cvrow, searchText)">
-                            <td v-text="cvrow.name"></td>
-                            <td v-text="cvrow.created_at"></td>
-                            <td v-text="cvrow.updated_at"></td>
-                            <td>
-                                 <a :href="'showCv/'+cvrow.id" title="show in browser"><i class="small material-icons">visibility</i></a>
-                                 <a :href="'getPdf/'+cvrow.id" title="download pdf"><i class="small material-icons">play_for_work</i></a>
-                                 <router-link :to="'/edit/'+ cvrow.id + '/1'" title="add from copy"><i class="small material-icons">playlist_add</i></router-link>
-                                 <router-link :to="'/edit/'+ cvrow.id" title="edit"><i class="small material-icons">mode_edit</i></router-link>
-                                 <a href="javascript:void(0)" v-on:click="deleteCv(cvrow, index)" title="delete"><i class="small material-icons">delete</i></a>
-                            </td>
-                        </tr>
+                
+                <tbody>
+                    <tr v-for="(cvrow, index) in cvlist" v-show="searchedText(cvrow, searchText)">
+                        <td>
+                             <router-link :to="'/edit/'+ cvrow.id" tag="span" style="cursor:pointer" v-text="cvrow.name"></router-link>
+                        </td>
+                        <td>
+                            <router-link :to="'/edit/'+ cvrow.id" tag="span" style="cursor:pointer" v-text="cvrow.created_at"></router-link>
+                        </td>
+                        <td>
+                            <router-link :to="'/edit/'+ cvrow.id" tag="span" style="cursor:pointer" v-text="cvrow.updated_at"></router-link>
+                        </td>
+                        <td>
+                             <a :href="'showCv/'+cvrow.id" title="show in browser"><i class="small material-icons">visibility</i></a>
+                             <a :href="'getPdf/'+cvrow.id" title="download pdf"><i class="small material-icons">play_for_work</i></a>
+                             <router-link :to="'/edit/'+ cvrow.id + '/1'" title="add from copy"><i class="small material-icons">playlist_add</i></router-link>
+                             <router-link :to="'/edit/'+ cvrow.id" title="edit"><i class="small material-icons">mode_edit</i></router-link>
+                             <a href="javascript:void(0)" v-on:click="deleteCv(cvrow, index)" title="delete"><i class="small material-icons">delete</i></a>
+                        </td>
+                    </tr>
 
 
-                    </tbody>
-                </transition>
+                </tbody>
+               
                 
             </table>
         </div>
@@ -111,9 +117,9 @@ const List = Vue.component('cv-list', {
     }
 });
 
-const Edit = {
+const Edit = Vue.component('cv-edit', {
     template: `
-<div class="row">
+<div>
     <form method="POST" action="/api/add" class="col s12" @submit.prevent="onSubmit" @keydown="errors.clear($event.target.name)">
         <input type="hidden" id="json" name="json" v-model="json">
         
@@ -149,8 +155,10 @@ const Edit = {
                     <ul class="row">
                         <summary-item is="summary-item"
                             v-for="(detail, index) in cvdata.summary.summary_details"
-                            v-bind:key="detail"
+                            v-bind:key="index"
                             v-bind:title="detail"
+                            v-on:moveUp="moveElementUp(cvdata.summary.summary_details, index)"
+                            v-on:moveDown="moveElementDown(cvdata.summary.summary_details, index)"
                             v-on:remove="cvdata.summary.summary_details.splice(index, 1)"
                             class="col s9"
                         >
@@ -174,8 +182,10 @@ const Edit = {
                     <ul class="row">
                         <summary-item is="summary-item"
                             v-for="(technology, index) in cvdata.summary.technologies"
-                            v-bind:key="technology"
+                            v-bind:key="index"
                             v-bind:title="technology"
+                            v-on:moveUp="moveElementUp(cvdata.summary.summary_details, index)"
+                            v-on:moveDown="moveElementDown(cvdata.summary.summary_details, index)"
                             v-on:remove="cvdata.summary.technologies.splice(index, 1)"
                             class="col s9"
                         ></summary-item>
@@ -429,6 +439,26 @@ const Edit = {
                  .catch(error => this.errors.record(error.response.data));
 
         },
+        moveElementUp(array, index){
+            if(array[index]){
+                if(array[index-1] && typeof array[index-1] !== "undefined"){
+                    let temp = array[index];
+                    let temp_1 = array[index-1];
+                    array.splice(index-1, 1, temp);
+                    array.splice(index, 1, temp_1);
+                }
+            }
+        },
+        moveElementDown(array, index) {
+            if(array[index]){
+                if(array[index+1] && typeof array[index+1] !== "undefined"){
+                    let temp = array[index];
+                    let temp_1 = array[index+1];
+                    array.splice(index+1, 1, temp);
+                    array.splice(index, 1, temp_1);
+                }
+            }
+        },
         addSummaryDetail(){
             this.cvdata.summary.summary_details.push(this.newSummaryDetail);
             this.newSummaryDetail = '';
@@ -512,12 +542,14 @@ const Edit = {
             }
         }
     }
-};
+});
 
 Vue.component('summary-item', {
     template: `
         <li>
             <div class="chip">{{ title }} 
+                <i class="material-icons" style="transform: rotate(270deg);position:relative;top:6px;left:3px;cursor:pointer;" v-on:click.prevent="$emit('moveUp')">play_arrow</i>
+                <i class="material-icons" style="transform: rotate(90deg);position:relative;top:3px;left:3px;cursor:pointer;" v-on:click.prevent="$emit('moveDown')">play_arrow</i>
                 <i class="close material-icons" v-on:click="$emit('remove')">close</i>
             </div> 
         </li>

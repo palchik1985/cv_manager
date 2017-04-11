@@ -46,13 +46,14 @@ Route::post('/', function () {
         ]);
         
         $html = View::make('resume', ['data' => $start_array])->render();
-        
+        $filename = $start_array['footer_text'] . ' - ' . $start_array['position'] . ' - ' . $start_array['name'] . ' - ' . date('Ymd') . '.pdf';
+        $content_disposition = 'attachment; filename="'.$filename.'"';
         return new Response(
             $snappy->getOutputFromHtml($html),
             200,
             [
                 'Content-Type'          => 'application/pdf',
-                'Content-Disposition'   => 'attachment; filename="file.pdf"'
+                'Content-Disposition'   => $content_disposition,
             ]
         );
         
@@ -96,13 +97,13 @@ Route::get('getPdf/{id}', function($id){
     ]);
     
     $html = View::make('resume', ['data' => $start_array])->render();
-    
+    $filename = $start_array['footer_text'] . ' - ' . $start_array['position'] . ' - ' . $start_array['name'] . ' - ' . date('Ymd') . '.pdf';
     return new Response(
         $snappy->getOutputFromHtml($html),
         200,
         [
             'Content-Type'          => 'application/pdf',
-            'Content-Disposition'   => 'attachment; filename="file.pdf"'
+            'Content-Disposition'   => 'attachment; filename="'.$filename.'"'
         ]
     );
     
