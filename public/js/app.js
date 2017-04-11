@@ -214,6 +214,8 @@ const Edit = Vue.component('cv-edit', {
                     v-for="(expirience, index) in cvdata.work_expirience"
                     v-bind:key="expirience"
                     v-bind:expirience="expirience"
+                    v-on:moveUp="moveElementUp(cvdata.work_expirience, index)"
+                    v-on:moveDown="moveElementDown(cvdata.work_expirience, index)"
                     v-on:remove="cvdata.work_expirience.splice(index, 1)"
                 >
                     <expirienceItemfield class="col s12"
@@ -241,6 +243,8 @@ const Edit = Vue.component('cv-edit', {
                     v-for="(tooltech, index) in cvdata.languages_tools_technologies"
                     v-bind:key="tooltech"
                     v-bind:tooltech="tooltech"
+                    v-on:moveUp="moveElementUp(cvdata.languages_tools_technologies, index)"
+                    v-on:moveDown="moveElementDown(cvdata.languages_tools_technologies, index)"
                     v-on:remove="cvdata.languages_tools_technologies.splice(index, 1)"
                 >
                     <tooltechItemField class="col s12"
@@ -571,6 +575,8 @@ Vue.component('expirience-item', {
             </div>
             <div class="col s1">
                 <a href="javascript:void(0)" class="right"><i style="margin-top: 10px" class="close material-icons" v-on:click="$emit('remove')">close</i></a>
+                <a href="javascript:void(0)" class="right"><i class="material-icons" style="transform: rotate(270deg);position:relative;top:6px;left:3px;" v-on:click.prevent="$emit('moveUp')">play_arrow</i></a>
+                <a href="javascript:void(0)" class="right"><i class="material-icons" style="transform: rotate(90deg);position:relative;top:3px;left:3px;" v-on:click.prevent="$emit('moveDown')">play_arrow</i></a>
             </div>
             <slot></slot>
         </div>
@@ -610,6 +616,8 @@ Vue.component('tooltechItem', {
             </div>
             <div class="col s1">
                 <a href="javascript:void(0)" class="right"><i style="margin-top: 10px" class="close material-icons" v-on:click="$emit('remove')">close</i></a>
+                <a href="javascript:void(0)" class="right"><i class="material-icons" style="transform: rotate(270deg);position:relative;top:6px;left:3px;" v-on:click.prevent="$emit('moveUp')">play_arrow</i></a>
+                <a href="javascript:void(0)" class="right"><i class="material-icons" style="transform: rotate(90deg);position:relative;top:3px;left:3px;" v-on:click.prevent="$emit('moveDown')">play_arrow</i></a>
             </div>
             <slot></slot>
         </div>
