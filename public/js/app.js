@@ -595,7 +595,7 @@ const Edit = Vue.component('cv-edit', {
 Vue.component('summary-item', {
     template: `
         <li>
-            <div class="chip">{{ title }} 
+            <div class="chip" style="height:auto">{{ title }} 
                 <i class="tiny material-icons" style="transform: rotate(270deg);position:relative;top:4px;cursor:pointer;" v-on:click.prevent="$emit('moveUp')">play_arrow</i>
                 <i class="tiny material-icons" style="transform: rotate(90deg);position:relative;top:2px;cursor:pointer;" v-on:click.prevent="$emit('moveDown')">play_arrow</i>
                 <i class="tiny material-icons" style="top:3px;position:relative;left:3px;cursor:pointer" v-on:click="$emit('edit')">mode_edit</i>
