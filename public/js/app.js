@@ -620,8 +620,8 @@ Vue.component('expirience-item', {
             </div>
             <div class="col s1">
                 <a href="javascript:void(0)" class="right"><i style="margin-top: 10px" class="close material-icons" v-on:click="$emit('remove')">close</i></a>
-                <a href="javascript:void(0)" class="right"><i class="material-icons" style="transform: rotate(270deg);position:relative;top:6px;left:3px;" v-on:click.prevent="$emit('moveUp')">play_arrow</i></a>
-                <a href="javascript:void(0)" class="right"><i class="material-icons" style="transform: rotate(90deg);position:relative;top:3px;left:3px;" v-on:click.prevent="$emit('moveDown')">play_arrow</i></a>
+                <a href="javascript:void(0)" class="right"><i class="material-icons" style="transform: rotate(270deg);position:relative;top:12px;left:3px;" v-on:click.prevent="$emit('moveUp')">play_arrow</i></a>
+                <a href="javascript:void(0)" class="right"><i class="material-icons" style="transform: rotate(90deg);position:relative;top:9px;left:3px;" v-on:click.prevent="$emit('moveDown')">play_arrow</i></a>
             </div>
             <slot></slot>
         </div>
@@ -661,8 +661,8 @@ Vue.component('tooltechItem', {
             </div>
             <div class="col s1">
                 <a href="javascript:void(0)" class="right"><i style="margin-top: 10px" class="close material-icons" v-on:click="$emit('remove')">close</i></a>
-                <a href="javascript:void(0)" class="right"><i class="material-icons" style="transform: rotate(270deg);position:relative;top:6px;left:3px;" v-on:click.prevent="$emit('moveUp')">play_arrow</i></a>
-                <a href="javascript:void(0)" class="right"><i class="material-icons" style="transform: rotate(90deg);position:relative;top:3px;left:3px;" v-on:click.prevent="$emit('moveDown')">play_arrow</i></a>
+                <a href="javascript:void(0)" class="right"><i class="material-icons" style="transform: rotate(270deg);position:relative;top:12px;left:3px;" v-on:click.prevent="$emit('moveUp')">play_arrow</i></a>
+                <a href="javascript:void(0)" class="right"><i class="material-icons" style="transform: rotate(90deg);position:relative;top:9px;left:3px;" v-on:click.prevent="$emit('moveDown')">play_arrow</i></a>
             </div>
             <slot></slot>
         </div>
