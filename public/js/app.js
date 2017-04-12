@@ -151,7 +151,6 @@ const Edit = Vue.component('cv-edit', {
             <div class="col s6" id="summary_details">
                 <div class="card col s12">
                     <span class="card-title">Summary details</span>
-                    
                     <ul class="row">
                         <summary-item is="summary-item"
                             v-for="(detail, index) in cvdata.summary.summary_details"
@@ -160,7 +159,7 @@ const Edit = Vue.component('cv-edit', {
                             v-on:edit="editDetail(index)"
                             v-on:moveUp="moveElementUp(cvdata.summary.summary_details, index)"
                             v-on:moveDown="moveElementDown(cvdata.summary.summary_details, index)"
-                            v-on:remove="cvdata.summary.summary_details.splice(index, 1)"
+                            v-on:remove="removeDetail(index)"
                             class="col s12"
                         >
                         </summary-item>
@@ -194,7 +193,7 @@ const Edit = Vue.component('cv-edit', {
                             v-on:edit="editTechnology(index)"
                             v-on:moveUp="moveElementUp(cvdata.summary.technologies, index)"
                             v-on:moveDown="moveElementDown(cvdata.summary.technologies, index)"
-                            v-on:remove="cvdata.summary.technologies.splice(index, 1)"
+                            v-on:remove="removeTechnology(index)"
                             class="col s12"
                         ></summary-item>
                             
@@ -466,6 +465,7 @@ const Edit = Vue.component('cv-edit', {
 
         },
         moveElementUp(array, index){
+            console.log(index);
             if(array[index]){
                 if(array[index-1] && typeof array[index-1] !== "undefined"){
                     let temp = array[index];
@@ -476,6 +476,7 @@ const Edit = Vue.component('cv-edit', {
             }
         },
         moveElementDown(array, index) {
+            console.log(index);
             if(array[index]){
                 if(array[index+1] && typeof array[index+1] !== "undefined"){
                     let temp = array[index];
@@ -496,8 +497,16 @@ const Edit = Vue.component('cv-edit', {
             this.newSummaryDetail = '';
         },
         editDetail(index) {
+
+            console.log(index);
             if(this.cvdata.summary.summary_details[index]){
                 this.newSummaryDetail = this.cvdata.summary.summary_details[index];
+                this.cvdata.summary.summary_details.splice(index, 1);
+            }
+        },
+        removeDetail(index){
+            console.log(index);
+            if(this.cvdata.summary.summary_details[index]){
                 this.cvdata.summary.summary_details.splice(index, 1);
             }
         },
@@ -512,6 +521,11 @@ const Edit = Vue.component('cv-edit', {
         editTechnology(index){
             if(this.cvdata.summary.technologies[index]){
                 this.newSummaryTechnology = this.cvdata.summary.technologies[index];
+                this.cvdata.summary.technologies.splice(index, 1);
+            }
+        },
+        removeTechnology(index){
+            if(this.cvdata.summary.technologies[index]){
                 this.cvdata.summary.technologies.splice(index, 1);
             }
         },
@@ -599,7 +613,7 @@ Vue.component('summary-item', {
                 <i class="tiny material-icons" style="transform: rotate(270deg);position:relative;top:4px;cursor:pointer;" v-on:click.prevent="$emit('moveUp')">play_arrow</i>
                 <i class="tiny material-icons" style="transform: rotate(90deg);position:relative;top:2px;cursor:pointer;" v-on:click.prevent="$emit('moveDown')">play_arrow</i>
                 <i class="tiny material-icons" style="top:3px;position:relative;left:3px;cursor:pointer" v-on:click="$emit('edit')">mode_edit</i>
-                <i class="close material-icons" v-on:click="$emit('remove')">close</i>
+                <i class="tiny material-icons" style="position: relative;top:3px;left:3px;cursor:pointer" v-on:click="$emit('remove')">close</i>
             </div> 
         </li>
     `,
