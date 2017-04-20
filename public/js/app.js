@@ -625,7 +625,7 @@ Vue.component('expirience-item', {
         <div>
             <div class="col s11">
                 <span class="card-title left">
-                    <strong>{{ expirience.date_start }} - {{ expirience.date_end }}</strong>
+                    <strong>{{ expirience.date_start }} {{ expirience.date_end }}</strong>
                     
                 </span>
                 <input class="col s3 right" type="text" v-model="expirience.date_end" placeholder="End date">
