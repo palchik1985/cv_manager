@@ -17,9 +17,11 @@
                     </tr>
                     @foreach($section['fields'] as $block)
                         <tr>
-                            @foreach($block as $item)
-                                    <td>{{ $item }}</td>
-                            @endforeach
+                            <td>{{ $block['name'] }}</td>
+                            <td>{{ $block['level'] }}</td>
+                            <td>{{ $block['expirience'] }}</td>
+                            <td>{{ $block['last_used'] }}</td>
+
                         </tr>
                     @endforeach
                 </table>
