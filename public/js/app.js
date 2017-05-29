@@ -175,7 +175,7 @@ const Edit = Vue.component('cv-edit', {
                             name="summarydetails"
                             placeholder="Add new summary detail"
                             >
-                            <label for="summarydetails">Add to end: press [ENTER].   Add to first: press [SHIFT + ENTER]</label>
+                            <label class="active" for="summarydetails">Add to end: press [ENTER].   Add to first: press [SHIFT + ENTER]</label>
                             <a class="col s1" href="#" v-on:click.prevent="addSummaryDetail" title="add to last [ENTER]"><i style="margin-top:10px" class="material-icons">add</i></a>
                             
                         </div>
@@ -220,7 +220,7 @@ const Edit = Vue.component('cv-edit', {
                             name="summarytechnologies"
                             placeholder="Add new summary technology"
                             >
-                            <label for="summarytechnologies">Add to end: press [ENTER].   Add to first: press [SHIFT + ENTER]</label>
+                            <label class="active" for="summarytechnologies">Add to end: press [ENTER].   Add to first: press [SHIFT + ENTER]</label>
                             <a class="col s1" href="#" v-on:click.prevent="addSummaryTechnology" title="add to last [ENTER]"><i style="margin-top:10px" class="material-icons">add</i></a>
                             
                         </div>
