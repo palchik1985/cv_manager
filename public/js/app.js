@@ -127,22 +127,22 @@ const Edit = Vue.component('cv-edit', {
         <div class="row">
             <div class="input-field col s6">
                 <input type="text" class="validate" id="header_text" name="header_text" v-model="cvdata.header_text">
-                <label for="header_text">Header text</label>
+                <label v-bind:class="{ active:(cvdata.header_text && cvdata.header_text != '') }" for="header_text">Header text</label>
             </div>
             <div class="input-field col s6">
                 <input type="text" class="validate" id="footer_text" name="footer_text" v-model="cvdata.footer_text">
-                <label for="footer_text">Footer text</label>
+                <label v-bind:class="{ active: (cvdata.footer_text && cvdata.footer_text != '') }" for="footer_text">Footer text</label>
             </div>
         </div>
         
         <div class="row">
             <div class="input-field col s6">
                 <input type="text" class="validate" v-bind:class="{ invalid: errors.get('name')}" id="name" name="name" v-model="cvdata.name">
-                <label for="name" v-bind:data-error="errors.get('name')">Name</label>
+                <label v-bind:class="{ active: (cvdata.name && cvdata.name != '' ) }" for="name" v-bind:data-error="errors.get('name')">Name</label>
             </div>
             <div class="input-field col s6">
                 <input type="text" class="validate" id="position"  name="position" v-model="cvdata.position">
-                <label for="position" >Position</label>
+                <label v-bind:class="{ active: (cvdata.position && cvdata.position != '' ) }" for="position" >Position</label>
             </div>
         </div>
         
@@ -173,8 +173,9 @@ const Edit = Vue.component('cv-edit', {
                             v-on:keydown.shift.enter.prevent="addSummaryDetailFirst"
                             v-on:keydown.enter.prevent="addSummaryDetail"
                             name="summarydetails"
+                            placeholder="Add new summary detail"
                             >
-                            <label for="summarydetails">Add new summary detail</label>
+                            <label for="summarydetails">Add to end: press [ENTER].   Add to first: press [SHIFT + ENTER]</label>
                             <a class="col s1" href="#" v-on:click.prevent="addSummaryDetail" title="add to last [ENTER]"><i style="margin-top:10px" class="material-icons">add</i></a>
                             
                         </div>
@@ -217,8 +218,9 @@ const Edit = Vue.component('cv-edit', {
                             v-on:keyup.shift.enter.prevent="addSummaryTechnologyFirst"
                             v-on:keydown.enter.prevent="addSummaryTechnology"
                             name="summarytechnologies"
+                            placeholder="Add new summary technology"
                             >
-                            <label for="summarytechnologies">Add new summary detail</label>
+                            <label for="summarytechnologies">Add to end: press [ENTER].   Add to first: press [SHIFT + ENTER]</label>
                             <a class="col s1" href="#" v-on:click.prevent="addSummaryTechnology" title="add to last [ENTER]"><i style="margin-top:10px" class="material-icons">add</i></a>
                             
                         </div>
