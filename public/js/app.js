@@ -166,14 +166,16 @@ const Edit = Vue.component('cv-edit', {
                     </ul> 
                     <div class="row">
                         <div class="input-field col s12">
-                            <a class="col s1" href="#" v-on:click.prevent="addSummaryDetailFirst" title="add to first"><i style="margin-top:10px" class="material-icons">add</i></a>
+                            <a class="col s1" href="#" v-on:click.prevent="addSummaryDetailFirst" title="add to first [SHIFT + ENTER]"><i style="margin-top:10px" class="material-icons">add</i></a>
                             <input type="text"
                             class="col s9"
                             v-model="newSummaryDetail"
+                            v-on:keydown.shift.enter.prevent="addSummaryDetailFirst"
+                            v-on:keydown.enter.prevent="addSummaryDetail"
                             name="summarydetails"
                             >
                             <label for="summarydetails">Add new summary detail</label>
-                            <a class="col s1" href="#" v-on:click.prevent="addSummaryDetail" title="add to last"><i style="margin-top:10px" class="material-icons">add</i></a>
+                            <a class="col s1" href="#" v-on:click.prevent="addSummaryDetail" title="add to last [ENTER]"><i style="margin-top:10px" class="material-icons">add</i></a>
                             
                         </div>
                         
@@ -208,14 +210,16 @@ const Edit = Vue.component('cv-edit', {
                     <!--</div>-->
                     <div class="row">
                         <div class="input-field col s12">
-                            <a class="col s1" href="#" v-on:click.prevent="addSummaryTechnologyFirst" title="add to first"><i style="margin-top:10px" class="material-icons">add</i></a>
+                            <a class="col s1" href="#" v-on:click.prevent="addSummaryTechnologyFirst" title="add to first [SHIFT + ENTER]"><i style="margin-top:10px" class="material-icons">add</i></a>
                             <input type="text"
                             class="col s9"
                             v-model="newSummaryTechnology"
+                            v-on:keyup.shift.enter.prevent="addSummaryTechnologyFirst"
+                            v-on:keydown.enter.prevent="addSummaryTechnology"
                             name="summarytechnologies"
                             >
                             <label for="summarytechnologies">Add new summary detail</label>
-                            <a class="col s1" href="#" v-on:click.prevent="addSummaryTechnology" title="add to last"><i style="margin-top:10px" class="material-icons">add</i></a>
+                            <a class="col s1" href="#" v-on:click.prevent="addSummaryTechnology" title="add to last [ENTER]"><i style="margin-top:10px" class="material-icons">add</i></a>
                             
                         </div>
                         
@@ -226,10 +230,10 @@ const Edit = Vue.component('cv-edit', {
             </div>
         </div>
         
-        <!-- WORK EXPIRIENCE -->
+        <!-- WORK EXPERIENCE -->
         <div class="row">
             <div class="col s12">
-                <h5>Work expirience</h5>
+                <h5>Work experience</h5>
                 <work-expirience class="col s12 card"
                     is="expirience-item"
                     v-for="(expirience, index) in cvdata.work_expirience"
@@ -489,12 +493,16 @@ const Edit = Vue.component('cv-edit', {
 
         // summary
         addSummaryDetail(){
-            this.cvdata.summary.summary_details.push(this.newSummaryDetail);
-            this.newSummaryDetail = '';
+            if(this.newSummaryDetail !== '') {
+                this.cvdata.summary.summary_details.push(this.newSummaryDetail);
+                this.newSummaryDetail = '';
+            }
         },
         addSummaryDetailFirst(){
-            this.cvdata.summary.summary_details.unshift(this.newSummaryDetail);
-            this.newSummaryDetail = '';
+            if(this.newSummaryDetail !== ''){
+                this.cvdata.summary.summary_details.unshift(this.newSummaryDetail);
+                this.newSummaryDetail = '';
+            }
         },
         editDetail(index) {
 
@@ -511,12 +519,16 @@ const Edit = Vue.component('cv-edit', {
             }
         },
         addSummaryTechnology(){
-            this.cvdata.summary.technologies.push(this.newSummaryTechnology);
-            this.newSummaryTechnology = '';
+            if(this.newSummaryTechnology !== '') {
+                this.cvdata.summary.technologies.push(this.newSummaryTechnology);
+                this.newSummaryTechnology = '';
+            }
         },
         addSummaryTechnologyFirst(){
-            this.cvdata.summary.technologies.unshift(this.newSummaryTechnology);
-            this.newSummaryTechnology = '';
+            if(this.newSummaryTechnology !== '') {
+                this.cvdata.summary.technologies.unshift(this.newSummaryTechnology);
+                this.newSummaryTechnology = '';
+            }
         },
         editTechnology(index){
             if(this.cvdata.summary.technologies[index]){
