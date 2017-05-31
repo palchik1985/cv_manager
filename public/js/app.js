@@ -232,6 +232,35 @@ const Edit = Vue.component('cv-edit', {
             </div>
         </div>
         
+        <!-- EDUCATION -->
+        <div class="row">
+            <div class="col s12">
+                <h5>Education</h5>
+                <education class="col s12 card"
+                    is="education-item"
+                    v-for="(education, index) in cvdata.education"
+                    v-bind:key="education"
+                    v-bind:education="education"
+                    v-on:moveUp="moveElementUp(cvdata.education, index)"
+                    v-on:moveDown="moveElementDown(cvdata.education, index)"
+                    v-on:remove="cvdata.education.splice(index, 1)"
+                >
+                    <educationItemfield class="col s12"
+                        is="education-item-field"
+                        v-for="(educationitem, educationindex) in education.fields"
+                        v-bind:key="educationitem"
+                        v-bind:educationitem="educationitem"
+                        v-on:remove="cvdata.education[index].fields.splice(educationindex, 1)"
+                        
+                    ></educationItemfield>
+                    <div class="col s12 card-action">
+                        <a href="javascript:void(0)" v-on:click="addEducationItemField(index)">Add row</a>
+                    </div>
+                </education>
+                <a href="javascript:void(0)" v-on:click="addEducationItem">Add new education</a>
+            </div>
+        </div>
+        
         <!-- WORK EXPERIENCE -->
         <div class="row">
             <div class="col s12">
@@ -341,6 +370,36 @@ const Edit = Vue.component('cv-edit', {
                 name: '',
                 value: '',
             },
+
+            newEducationItem: {
+                fields: [
+                    {
+                        name: 'University',
+                        value: ''
+                    },
+                    {
+                        name: 'City',
+                        value: ''
+                    },
+                    {
+                        name: 'Country',
+                        value: ''
+                    },
+                    {
+                        name: 'Degree',
+                        value: ''
+                    },
+                    {
+                        name: 'Year of ending',
+                        value: ''
+                    },
+                ]
+            },
+            newEducationItemField: {
+                name: '',
+                value: '',
+            },
+
             newTooltechItem: {
                 name: '',
                 fields: [
@@ -371,6 +430,7 @@ const Edit = Vue.component('cv-edit', {
                         summary_details: [],
                         technologies: []
                     },
+                education: [],
                 work_expirience: [],
                 languages_tools_technologies: [
                     {
@@ -421,6 +481,7 @@ const Edit = Vue.component('cv-edit', {
                                 technologies: (typeof json.summary !== "undefined" && json.summary.technologies) ? json.summary.technologies : []
                             },
                         work_expirience: (typeof json.work_expirience !== "undefined") ? json.work_expirience : [],
+                        education: (typeof json.education !== "undefined") ? json.education : [],
                         languages_tools_technologies: (typeof json.languages_tools_technologies !== "undefined") ? json.languages_tools_technologies : [
                             {
                                 name: 'Programming Languages',
@@ -542,6 +603,45 @@ const Edit = Vue.component('cv-edit', {
             if(this.cvdata.summary.technologies[index]){
                 this.cvdata.summary.technologies.splice(index, 1);
             }
+        },
+
+        // education:
+        addEducationItem(){
+            this.cvdata.education.push(this.newEducationItem);
+            this.newEducationItem = {
+                fields: [
+                    {
+                        name: 'University',
+                        value: ''
+                    },
+                    {
+                        name: 'City',
+                        value: ''
+                    },
+                    {
+                        name: 'Country',
+                        value: ''
+                    },
+                    {
+                        name: 'Degree',
+                        value: ''
+                    },
+                    {
+                        name: 'Year of ending',
+                        value: ''
+                    },
+                ]
+            };
+        },
+        addEducationItemField(index){
+            this.cvdata.education[index].fields.push(this.newEducationItemField);
+            this.newEducationItemField = {
+                name: '',
+                value: ''
+            };
+        },
+        removeEducationItemField(mainindex, itemindex){
+            this.cvdata.education[mainindex].fields.splice(itemindex, 1);
         },
 
         // work_expirience:
@@ -674,6 +774,39 @@ Vue.component('expirience-item-field', {
         </div>
     `,
     props: ['expirienceitem']
+});
+
+Vue.component('education-item', {
+    template: `
+        <div>
+            <div class="col s1">
+                <a href="javascript:void(0)" class="right"><i style="margin-top: 10px" class="close material-icons" v-on:click="$emit('remove')">close</i></a>
+                <a href="javascript:void(0)" class="right"><i class="material-icons" style="transform: rotate(270deg);position:relative;top:12px;left:3px;" v-on:click.prevent="$emit('moveUp')">play_arrow</i></a>
+                <a href="javascript:void(0)" class="right"><i class="material-icons" style="transform: rotate(90deg);position:relative;top:9px;left:3px;" v-on:click.prevent="$emit('moveDown')">play_arrow</i></a>
+            </div>
+            <slot></slot>
+        </div>
+    `,
+    props: ['education'],
+
+});
+
+Vue.component('education-item-field', {
+    template: `
+        <div>
+            <div class="input-field col s3">
+                <input type="text" class="validate" v-model="educationitem.name" placeholder="Add Header">
+            </div>
+            <div class="input-field col s8">
+                <input type="text" class="validate" v-model="educationitem.value" placeholder="Add value">
+            </div>
+            <div class="col s1">
+                <a href="javascript:void(0)"><i class="close material-icons mt-15" v-on:click="$emit('remove')">close</i></a>
+            </div>
+            <slot></slot>
+        </div>
+    `,
+    props: ['educationitem']
 });
 
 Vue.component('tooltechItem', {
