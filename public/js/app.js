@@ -190,7 +190,7 @@ const Edit = Vue.component('cv-edit', {
                     <input class="col s8" type="text" v-model="cvdata.summary.technologies_block_name" placeholder="Block Name">
                     <p class="right">
                         <input type="checkbox" id="technologies_block_enabled" v-model="cvdata.summary.technologies_block_enabled"/>
-                        <label for="technologies_block_enabled">{{ technologies_block_status }}</label>
+                        <label for="technologies_block_enabled">Show block</label>
                     </p>
                     <!--<span class="card-title">Summary technologies</span>-->
                     <ul class="row">
@@ -613,7 +613,7 @@ const Edit = Vue.component('cv-edit', {
                 this.cvdata.summary.technologies.splice(index, 1);
             }
         },
-        
+
         // education:
         addEducationItem(){
             this.cvdata.education.push(this.newEducationItem);
@@ -725,11 +725,6 @@ const Edit = Vue.component('cv-edit', {
                 expirience: '',
                 last_used: ''
             }
-        }
-    },
-    computed: {
-        technologies_block_status: function(){
-            return (this.cvdata.summary.technologies_block_enabled == true) ? "Show" : "Hide"
         }
     }
 });
