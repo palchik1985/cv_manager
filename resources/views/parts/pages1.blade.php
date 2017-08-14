@@ -16,17 +16,18 @@
                     <li>{{$line}}</li>
                 @endforeach
             </ul>
-            <h3>TECHNOLOGIES</h3>
-            <div class="column1"
-            @if(count($data['summary']['technologies']) > 20)
-                style="column-count:2;"
+            @if(!isset($data['summary']['technologies_block_enabled']) || (isset($data['summary']['technologies_block_enabled']) && $data['summary']['technologies_block_enabled'] == true))
+                <h3>{{ isset($data['summary']['technologies_block_name']) ? strtoupper($data['summary']['technologies_block_name']) : 'Summary Technologies'}}</h3>
+                <div class="column1"
+                @if(count($data['summary']['technologies']) > 20)
+                    style="column-count:2;"
+                @endif
+                >
+                    @foreach($data['summary']['technologies'] as $line)
+                        <p>{{$line}}</p>
+                    @endforeach
+                </div>
             @endif
-            >
-                @foreach($data['summary']['technologies'] as $line)
-                    <p>{{$line}}</p>
-                @endforeach
-            </div>
-
         </div>
         <footer class="footer">
             <h5>{{ $data['footer_text'] }}</h5>

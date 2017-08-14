@@ -187,7 +187,12 @@ const Edit = Vue.component('cv-edit', {
             </div>
             <div class="col s6" id="summary_technologies">
                 <div class="card col s12">
-                    <span class="card-title">Summary technologies</span>
+                    <input class="col s8" type="text" v-model="cvdata.summary.technologies_block_name" placeholder="Block Name">
+                    <p class="right">
+                        <input type="checkbox" id="technologies_block_enabled" v-model="cvdata.summary.technologies_block_enabled"/>
+                        <label for="technologies_block_enabled">{{ technologies_block_status }}</label>
+                    </p>
+                    <!--<span class="card-title">Summary technologies</span>-->
                     <ul class="row">
                         <summary-item is="summary-item"
                             v-for="(technology, index) in cvdata.summary.technologies"
@@ -428,7 +433,9 @@ const Edit = Vue.component('cv-edit', {
                 summary:
                     {
                         summary_details: [],
-                        technologies: []
+                        technologies: [],
+                        technologies_block_name: 'Summary Technologies',
+                        technologies_block_enabled: true
                     },
                 education: [],
                 work_expirience: [],
@@ -478,7 +485,9 @@ const Edit = Vue.component('cv-edit', {
                         summary:
                             {
                                 summary_details: (typeof json.summary !== "undefined" && json.summary.summary_details) ? json.summary.summary_details : [],
-                                technologies: (typeof json.summary !== "undefined" && json.summary.technologies) ? json.summary.technologies : []
+                                technologies: (typeof json.summary !== "undefined" && json.summary.technologies) ? json.summary.technologies : [],
+                                technologies_block_name: (typeof json.summary !== "undefined" && json.summary.technologies_block_name) ? json.summary.technologies_block_name : 'Summary Technologies',
+                                technologies_block_enabled: (typeof json.summary !== "undefined" && typeof json.summary.technologies_block_enabled === "boolean") ? json.summary.technologies_block_enabled : true
                             },
                         work_expirience: (typeof json.work_expirience !== "undefined") ? json.work_expirience : [],
                         education: (typeof json.education !== "undefined") ? json.education : [],
@@ -506,7 +515,7 @@ const Edit = Vue.component('cv-edit', {
                                 ]
                             }
                         ]
-                    }
+                    };
                 });
             }
         },
@@ -604,7 +613,7 @@ const Edit = Vue.component('cv-edit', {
                 this.cvdata.summary.technologies.splice(index, 1);
             }
         },
-
+        
         // education:
         addEducationItem(){
             this.cvdata.education.push(this.newEducationItem);
@@ -716,6 +725,11 @@ const Edit = Vue.component('cv-edit', {
                 expirience: '',
                 last_used: ''
             }
+        }
+    },
+    computed: {
+        technologies_block_status: function(){
+            return (this.cvdata.summary.technologies_block_enabled == true) ? "Show" : "Hide"
         }
     }
 });
