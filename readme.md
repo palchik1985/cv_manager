@@ -1,3 +1,5 @@
+ THIS PROJECT ONLY FOR INTERNAL USAGE IN COMPANY, CAUSE IT HAS VERY SIMPLE FUNCTIONALITY AND SOME SECURITY PROBLEMS
+ 
  * examples for use (you can copy this cases for use):
  * WARNING: change /$PATH_TO_LARAVEL_FOLDER/artisan to your full path to Laravel project folder.
  *   My path for example: /var/www/htmltopdf/artisan
