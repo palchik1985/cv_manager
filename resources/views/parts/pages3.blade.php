@@ -2,7 +2,7 @@
     <div class="container">
         <header class="header">
             <h5>Programming languages <span>Tools, applications, methodologies</span></h5>
-            <img src="{{ url('/') }}/img/itrex-logo.svg" alt="ITRex">
+            <img src="{{ url('/') }}/img/grey-logo.svg" alt="BIG DIG" style="margin: 13px 42px 0 0;">
         </header>
         <div class="program">
 

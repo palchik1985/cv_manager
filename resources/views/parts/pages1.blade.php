@@ -4,7 +4,7 @@
         <header class="header">
             <div class="header-top">
                 <h5>{{ $data['header_text'] }}</h5>
-                <img src="{{ url('/') }}/img/itrex-logo.svg" alt="ITRex">
+                <img src="{{ url('/') }}/img/grey-logo.svg" alt="BIG DIG" style="margin: 13px 42px 0 0;">
             </div>
             <h2>{{ $data['name'] }}</h2>
             <p>{{ $data['position'] }}</p>
